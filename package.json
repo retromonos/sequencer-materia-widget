@@ -17,5 +17,8 @@
   "devDependencies": {
     "husky": "^9.1.7",
     "materia-widget-development-kit": "^3.0.3"
+  },
+  "dependencies": {
+    "sortablejs": "^1.15.6"
   }
 }

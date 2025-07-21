@@ -10,12 +10,12 @@ const entries = {
 	'player': [
 		path.join(srcPath, 'player.html'),
 		path.join(srcPath, 'player.scss'),
-		path.join(srcPath, 'player.coffee')
+		path.join(srcPath, 'player.js')
 	],
 	'creator': [
 		path.join(srcPath, 'creator.html'),
 		path.join(srcPath, 'creator.scss'),
-		path.join(srcPath, 'creator.coffee')
+		path.join(srcPath, 'creator.js')
 	]
 }
 

@@ -3,8 +3,10 @@
 	<head>
 		<title>Sequencer Widget Engine</title>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- STYLESHEETS -->
+		<link href="//fonts.googleapis.com/css?family=Balsamiq+Sans:400,700" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" type="text/css" href="player.css">
 
 		<!-- REQUIRED MATERIA JAVASCRIPT -->
@@ -17,221 +19,334 @@
 
 		<!-- MAIN PLAYER SCRIPT -->
 		<script src="player.js"></script>
+		<!-- SortableJS for drag-and-drop -->
+		<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 	</head>
 
 <body>
 <div class="fade active"></div>
 
 <!-- The child container element has to be inline. For some reason putting it on the next line breaks everything. -->
-<!-- message window (Tutorial) -->
-<script type="text/template" id="demo-window"><div id="demo">
-	<div id="popupWindowHeader">
-		<h3>Sequencer!</h3>
-		<h4>Put em in order</h4>
-	</div>
-	<div id="demoArea">
-		<section id='demo-animation' aria-hidden="true">
-			<div id="demoTitle"><%= demoTitle %></div>
-			<div id="demoFooter"></div>
-			<div class="demoTile move" id="dt1">1</div>
-			<div class="demoTile move" id="dt2">2</div>
-			<div class="demoTile move" id="dt3">3</div>
-			<div id="demoTileSection"></div>
-			<div id="demoOrderArea"></div>
-			<div id="demoNumberBar"></div>
-			<div id="demoSubmitButton" class="hover">Submit</div>
-			<div id="demoMouse"><img src="assets/cursor.svg"></div>
-			<div id="demoFinish" class="show">Score:
-				<div id="demoScore">100%</div>
-			</div>
-		</section>
-		<div id="playInstructions">
-			<h3>How to play:</h3>
-			<p>Order the tiles correctly in the sequence list.</p>
-			<p>You have <span class="demoDeduction"><%= freeAttempts %> guesses</span>.</p>
-			<p>Your highest score will be saved.</p>
+<!-- Instructions popup (Multi-page tutorial) -->
+<script type="text/template" id="instructions-window"><div id="instructionsHeader">
+		<div class="instructions-header">
+			<h3 class="instructionsTitle">How to Play:</h3>
+			<button class="instructions-close" aria-label="Close instructions">×</button>
 		</div>
-		<button tabindex=0
-			class="demoButton"
-			aria-label="<%= introInstructions %>">
-			Play Sequencer
-		</button>
+		<div class="instructions-content">
+			<!-- Page 1: How to Play -->
+			<div class="instructions-page" id="page-how-to-play">
+				<div class="page-content">
+					<h4>Welcome to Sequencer!</h4>
+					<div class="instruction-steps">
+						<div class="step">
+							<div class="step-number">1</div>
+							<div class="step-text">
+								<strong>Drag tiles</strong> from the left panel to the sequence area on the right
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">2</div>
+							<div class="step-text">
+								<strong>Reorder tiles</strong> by dragging them up and down in the sequence
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">3</div>
+							<div class="step-text">
+								<strong>Click the star icon</strong> on any tile to view helpful clues
+							</div>
+						</div>
+						<div class="step">
+							<div class="step-number">4</div>
+							<div class="step-text">
+								<strong>Submit your sequence</strong> when you think you have the correct order
+							</div>
+						</div>
+					</div>
+					<div class="attempts-info">
+						<p>You have <span class="attempts-highlight"><%= freeAttempts %> attempts</span> to get the correct sequence.</p>
+						<p>Your highest score will be saved!</p>
+					</div>
+				</div>
+				<div class="page-navigation">
+					<button class="nav-button next-button" id="next-to-keyboard">
+						Next: Keyboard Controls →
+					</button>
+				</div>
+			</div>
+
+			<!-- Page 2: Keyboard Instructions -->
+			<div class="instructions-page hidden" id="page-keyboard">
+				<div class="page-content">
+					<h4>Keyboard Controls</h4>
+					<div class="keyboard-instructions">
+						<div class="key-group">
+							<div class="key-row">
+								<div class="key-button">Tab</div>
+								<div class="key-description">Navigate between tiles</div>
+							</div>
+							<div class="key-row">
+								<div class="key-button">Enter</div>
+								<div class="key-description">View clue for selected tile</div>
+							</div>
+							<div class="key-row">
+								<div class="key-button">Space</div>
+								<div class="key-description">Add/remove tile from sequence</div>
+							</div>
+						</div>
+						<div class="key-group">
+							<div class="key-row">
+								<div class="key-button">→</div>
+								<div class="key-description">Add tile to sequence</div>
+							</div>
+							<div class="key-row">
+								<div class="key-button">←</div>
+								<div class="key-description">Remove tile from sequence</div>
+							</div>
+							<div class="key-row">
+								<div class="key-button">↑</div>
+								<div class="key-description">Move tile up in sequence</div>
+							</div>
+							<div class="key-row">
+								<div class="key-button">↓</div>
+								<div class="key-description">Move tile down in sequence</div>
+							</div>
+							<div class="key-row">
+								<div class="key-button">Ctrl+V</div>
+								<div class="key-description">Toggle between pile and organized list view</div>
+							</div>
+						</div>
+					</div>
+					<div class="accessibility-note">
+						<p><strong>Accessibility:</strong> All features are fully accessible via keyboard navigation and screen readers.</p>
+					</div>
+				</div>
+				<div class="page-navigation">
+					<button class="nav-button prev-button" id="prev-to-how-to-play">
+						← Back to How to Play
+					</button>
+					<button class="nav-button start-button" id="start-game">
+						Start Game
+					</button>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 </script>
 
 <script type="text/template" id="t-board"><div class="board" inert="true">
-		<header>
-			<h3>Sequence:</h3>
-			<section id="widgetTitle"><%= title %></section>
-			<hr>
-		</header>
-		<button id="keyboard-instructions"
-			class="big-button enabled"
-			tabindex=0
-			aria-label="<%= keyboardInstructions %>">
-			Keyboard Instructions
-		</button>
-		<div id="dragContainer" role="list">
-			<!-- tiles -->
-			<% for(var t in tiles) { var tile = tiles[t]; %>
-				<div class="tile"
-					data-id="<%= tile.id %>"
-					id="<%= tile.id %>"
-					tabindex=0
-					role="listitem">
-				<%= tile.name %>
-					<button class="clue" data-id="<%= tile.id %>" tabindex="-1"></button>
+		<!-- Top Header -->
+		<header class="top-header">
+			<div class="header-left">
+				<h1 class="app-title">Sequencer</h1>
+			</div>
+			<div class="header-right">
+				<div class="score-display">
+					<span>Score: <span id="score"><%= score %></span></span>
 				</div>
-			<% } %>
-			<div id="tileFiller"></div>
-		</div>
-		<section id="tileSection"></section>
-		<aside id="numberBar" class="nondraggable">
-			<div class="numbers">1</div>
-		</aside>
-		<section id="orderArea">
-			<div id="orderInstructions">Drag and organize tiles here</div>
-		</section>
-		<div id="submitHolder" class="nondraggable">
-			<button id="submit"
-				class="big-button nondraggable"
-				tabindex=0>
-				Submit Sequence
-			</button>
-		</div>
+				<button id="help-button" class="help-button" aria-label="Show instructions" tabindex="0">
+					?
+				</button>
+			</div>
+		</header>
+
+		<!-- Main Content Area -->
+		<main class="main-content">
+			<!-- Left Section -->
+			<section class="left-section">
+				<!-- Title Card -->
+				<div class="title-card">
+					<div class="title-content">
+						<h2 id="widgetTitle"><%= title %></h2>
+					</div>
+				</div>
+
+				<!-- Controls -->
+				<div class="controls-bar">
+					<div class="attempts-info">
+						<span id="practiceMode-info" class="control-pill">(Practice Mode)</span>
+						<span id="attempts-info" class="control-pill">
+							<span id="attemptsLeft"><%= freeAttempts %></span> guesses left
+						</span>
+					</div>
+					<button class="list-view-btn control-pill">
+						≡ List view
+					</button>
+				</div>
+
+				<!-- Tile Section -->
+				<div id="tileSection" class="tile-section">
+					<div id="dragContainer" role="list" class="drag-container">
+						<!-- tiles -->
+						<% for(var t in tiles) { var tile = tiles[t]; %>
+							<div class="tile"
+								data-id="<%= tile.id %>"
+								id="<%= tile.id %>"
+								tabindex=0
+								role="listitem"
+								aria-label="<%= tile.name %> - position to be determined">
+								<div class="tile-icon" data-id="<%= tile.id %>">
+									<span class="star">★</span>
+								</div>
+								<div class="tile-content">
+									<%= tile.name %>
+								</div>
+							</div>
+						<% } %>
+						<div id="tileFiller"></div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Right Section -->
+			<section class="right-section">
+				<div class="sequence-container">
+					<!-- Order Area -->
+					<div id="orderArea" class="order-area" role="list" aria-label="Sequence area - drag tiles here to order them">
+						<div id="orderInstructions" class="order-instructions">
+							Drag tiles here to sequence them
+						</div>
+					</div>
+				</div>
+
+				<!-- Submit Button -->
+				<div class="submit-container">
+					<button id="submit"
+						class="submit-button"
+						tabindex=0
+						disabled>
+						Submit Sequence
+					</button>
+				</div>
+			</section>
+		</main>
+
 		<button id="wraparound"
-			class="visible-on-focus big-button nondraggable"
+			class="visible-on-focus"
 			tabindex=0
 			aria-label='Press Space or Enter to select the first unsorted tile.'>
 			Select First Unsorted Item
 		</button>
-		<footer id="score-area">
-			<h4 id="score-text">Score: <span id="score"><%= score %></span></h4>
-			<h5><span id="practiceMode-info">(Practice Mode)</span></h5>
-			<h5><span id="attempts-info">(<span id="attemptsLeft"><%= freeAttempts %></span> guesses left)</span></h5>
-		</footer>
 	</div>
 </script>
 
 <!-- clues -->
 <script type="text/template" id="tile-clue-window"><div id="clueHeader">
-		<h3 class="clueTitle"><%= name %></h3>
+		<div class="clue-header">
+			<h3 class="clueTitle"><%= name %></h3>
+			<button class="clue-close" aria-label="Close clue">×</button>
+		</div>
 		<aside role="definition" class="tile-clue-text" aria-live="polite">
 			<p class="clueDescription"><%= clue %></p>
 		</aside>
 	</div>
 </script>
 
-<!-- numbers -->
-<script type="text/template" id="numberBar-numbers"><div class="numbers">
-		<%= number %>
-	</div>
-</script>
 
-<!-- tile slots -->
-<script type="text/template" id="slot"><div class="tileSlot">
-		<p>This text belongs to the tileSlot <%= number %></p>
+<script type="text/template" id="drop-zone"><div class="drop-zone" data-position="<%= position %>">
 	</div>
 </script>
 
 <!-- message window (Finished) -->
-<script type="text/template" id="message-window"><div class="nondraggable" id="message">
-		<h2><%= title %></h2>
-		<p><%= messageText %></p>
+<script type="text/template" id="message-window"><div class="submit-sequence-popup" id="submitSequencePopup">
+		<div class="popup-content">
+			<div class="submit-header">
+				<h3 class="submitTitle"><%= title %></h3>
+				<button class="submit-close" aria-label="Close submit sequence popup">×</button>
+			</div>
+			<div class="submit-content">
+				<p><%= messageText %></p>
+				<button class="okay-button" id="okayButton" tabindex="0">
+					Okay
+				</button>
+			</div>
+		</div>
 	</div>
 </script>
 
 <!-- score results -->
-<script type="text/template" id="results-popup"><section id="resultsOuter">
-		<div id="popupWindowHeader">
-			<h3>Sequencer!</h3>
-			<h4>Put "em in order</h4>
+<script type="text/template" id="results-popup"><div id="resultsHeader">
+		<div class="results-header">
+			<h3 class="resultsTitle">Sequence Results</h3>
+			<button class="results-close" aria-label="Close results">×</button>
 		</div>
-		<div id="resultsInner" aria-hidden="true">
-			<h5>You have</h5>
-			<div id="flipNumberContainer">
-				<div id="rightDigit">
-					<div class="flipResultNumberTop">
-						<div id="numberTop">0</div>
-					</div>
-
-					<div class="flipResultNumberTopUnder">
-						<div id="numberTopUnder">0</div>
-					</div>
-
-					<div class="flipResultNumberBottom">
-						<div id="numberBottom">0</div>
-					</div>
-
-					<div class="flipResultNumberBottomUnder">
-						<div id="numberBottomUnder">0</div>
-					</div>
+		<div class="results-content">
+			<!-- Score Summary -->
+			<div class="score-summary">
+				<div class="score-circle">
+					<div class="score-number"><%= Math.round((correct / total) * 100) %>%</div>
+					<div class="score-label">Current Score</div>
 				</div>
-
-				<div id="leftDigit">
-					<div class="flipResultNumberTopDouble">
-						<div id="numberTopDouble">0</div>
+				<div class="score-details">
+					<div class="correct-items">
+						<span class="correct-number"><%= correct %></span>
+						<span class="correct-label">out of <span class="total-items"><%= total %></span> items in the right spot</span>
 					</div>
-
-					<div class="flipResultNumberTopUnderDouble">
-						<div id="numberTopUnderDouble">0</div>
-					</div>
-
-					<div class="flipResultNumberBottomDouble">
-						<div id="numberBottomDouble">0</div>
-					</div>
-
-					<div class="flipResultNumberBottomUnderDouble">
-						<div id="numberBottomUnderDouble">0</div>
+					<div class="best-score" id="bestScoreDisplay">
+						Best score so far: <span class="best-score-number"><%= highestScore %>%</span>
 					</div>
 				</div>
 			</div>
 
-			<div id="textBelowNumbers">
-				<h5>items in the right spot</h5>
-				<h6>out of <%= total %>.</h6>
+			<!-- Attempts Info - hide for perfect scores -->
+			<% if (correct !== total) { %>
+				<div class="attempts-status">
+					<% if (freeAttempts > 0 || practiceMode) { %>
+						<div class="attempts-remaining">
+							<% if (practiceMode) { %>
+								<span class="attempts-icon">∞</span>
+								<span class="attempts-text">Unlimited attempts (Practice Mode)</span>
+							<% } else { %>
+								<span class="attempts-icon"><%= freeAttempts %></span>
+								<span class="attempts-text"><%= freeAttempts === 1 ? 'attempt' : 'attempts' %> remaining</span>
+							<% } %>
+						</div>
+					<% } else { %>
+						<div class="attempts-exhausted">
+							<span class="attempts-icon">⚠</span>
+							<span class="attempts-text">No attempts remaining</span>
+						</div>
+					<% } %>
+				</div>
+			<% } %>
+
+			<!-- Action Buttons -->
+			<div class="results-actions">
+				<% if (correct === total) { %>
+					<!-- Perfect Score -->
+					<div class="perfect-score-message">
+						<span class="perfect-text">Perfect! All items in correct order!</span>
+					</div>
+					<button id="submitScoreButton" class="action-button secondary-button" aria-label="Visit score screen">
+						Visit Score Screen
+					</button>
+				<% } else if (freeAttempts > 0 || practiceMode) { %>
+					<!-- Can Try Again -->
+					<button id="resultsButton" class="action-button primary-button" aria-label="Try again">
+						Try Again
+						<% if (!practiceMode) { %>
+							<span class="attempts-count">(<%= freeAttempts %> <%= freeAttempts === 1 ? 'attempt' : 'attempts' %> left)</span>
+						<% } %>
+					</button>
+					<button id="submitScoreButton" class="action-button secondary-button" aria-label="Finish with best score of <%= highestScore %>%">
+						Finish with Best Score (<%= highestScore %>%)
+					</button>
+				<% } else { %>
+					<!-- No More Attempts -->
+					<button id="resultsButton" class="action-button primary-button" aria-label="Visit score screen">
+						Visit Score Screen
+					</button>
+				<% } %>
 			</div>
 		</div>
-		<div id="resultsBox">
-			<span id="lostPointsMessage" aria-hidden="true">
-				This score: <span class="circle" id="circle"><%= penalty %></span>
-			</span>
-			<!--<span id="bestScoreMessage">Best score: <span class="circle" id="bestcircle"><%= penalty %></span></span>-->
-			<div id="correctMessage" aria-hidden="true">Great Job!</div>
-			<div id="allAttemptsMessage" aria-hidden="true">You are out of guesses.</div>
-			<button id="resultsButton" class="resultsButton" aria-label=''></button>
-			<button id="submitScoreButton" aria-label=''></button>
-		</div>
-	</section>
+	</div>
 </script>
 
-<div id="keyboard-instructions-window">
-	<h3>Keyboard Instructions</h3>
-	<p>
-		Use the <strong>Tab</strong> key to navigate through the terms from top to bottom, left to right.
-	</p>
-	<p>
-		Hold the <strong>Shift</strong> key when pressing the <strong>Tab</strong> key to navigate in reverse.
-	</p>
-	<p>
-		You will reach the sequenced terms after navigating through all of the unsorted terms.
-	</p>
-	<p>
-		Press the <strong>Right Arrow</strong> key when an unsorted term is selected to move it to the end of the sequence.
-	</p>
-	<p>
-		Press the <strong>Left Arrow</strong> key when a sequenced term is selected to remove it from the sequence.
-	</p>
-	<p>
-		Press the <strong>Up Arrow</strong> or <strong>Down Arrow</strong> keys when a sequenced term is selected to move it up or down in the sequence.
-	</p>
-	<button id="keyboard-close"
-		class="big-button enabled"
-		tabindex=0>
-		Close Keyboard Instructions
-	</button>
-</div>
+<div role="status" class="ariaLiveStatus" aria-live="polite"></div>
+
+<!-- screen reader element for position announcements -->
+<div class="sr-only" aria-live="polite" id="positionAnnouncer"></div>
 
 <div class="confirmDialog" inert="true">
 	<p>
@@ -241,13 +356,10 @@
 	<button id="confirmBestScoreButton" class="resultsButton">Yes, finish with <span class="bestscore"></span>.</button>
 </div>
 
-<div role="status" class="ariaLiveStatus" aria-live="polite"></div>
-
 <!-- INITIALIZE -->
 	<script>
 		Materia.Engine.start(Sequencer.Engine);
 	</script>
-
 
 	</body>
 </html>
