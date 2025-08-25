@@ -54,7 +54,7 @@
 						<div class="step">
 							<div class="step-number">3</div>
 							<div class="step-text">
-								<strong>Click the star icon</strong> on any tile to view helpful clues
+								<strong>Click the question mark icon</strong> on any tile to view helpful clues
 							</div>
 						</div>
 						<div class="step">
@@ -139,7 +139,7 @@
 		<!-- Top Header -->
 		<header class="top-header">
 			<div class="header-left">
-				<h1 class="app-title">Sequencer</h1>
+				<h1 class="app-title"><%= title %></h1>
 			</div>
 			<div class="header-right">
 				<div class="score-display">
@@ -155,13 +155,6 @@
 		<main class="main-content">
 			<!-- Left Section -->
 			<section class="left-section">
-				<!-- Title Card -->
-				<div class="title-card">
-					<div class="title-content">
-						<h2 id="widgetTitle"><%= title %></h2>
-					</div>
-				</div>
-
 				<!-- Controls -->
 				<div class="controls-bar">
 					<div class="attempts-info">
@@ -187,7 +180,7 @@
 								role="listitem"
 								aria-label="<%= tile.name %> - position to be determined">
 								<div class="tile-icon" data-id="<%= tile.id %>">
-									<span class="star">★</span>
+									<span class="question-mark">?</span>
 								</div>
 								<div class="tile-content">
 									<%= tile.name %>

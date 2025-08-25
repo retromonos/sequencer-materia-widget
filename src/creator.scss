@@ -1,11 +1,31 @@
 * {
 	outline: 0;
-}
-
-@mixin boxSizing() {
+	user-select: none;
 	box-sizing: border-box;
 }
 
+//Official Sequencer colors
+$primary-blue: #4A90E2;
+$dark-blue: #00498C; 
+$text-blue: #001b35;
+$light-blue: #A8C8EC;
+$orange-dark: #f09c27;
+$score-white: #f8fcff;
+$cream: #FDF4E3;
+$peach: #E8B4A0;
+$orange: #D69E2E;
+$yellow: #fadc64;
+$white: #FFFFFF;
+$bgwhite: #fdfeff;
+$gray-100: #e6f5ff;
+$gray-200: #EDF2F7;
+$gray-300: #E2E8F0;
+$gray-400: #CBD5E0;
+$gray-500: #A0AEC0;
+$gray-600: #718096;
+$gray-700: #4A5568;
+$gray-800: #2D3748;
+$gray-900: #1A202C;
 
 @font-face {
 	font-family: 'icomoon';
@@ -28,58 +48,8 @@
 	line-height: 1;
 	display: inline;
 
-	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
-
-//Offical Sequencer colors
-$dgrey: #232629;
-$light: #f9f9f9;
-$grey: #C0C0C0;
-$medgrey: #727272;
-$medblue: #AEBCD3;
-$blue: #507CBE;
-$dblue: #6A7A92;
-$titleblue: #004C92;
-$buttonblue: #004E95;
-$textblue: #0A3077;
-$textbeige: #FCF5E3;
-$lblue: #DCE2EB;
-$red: #F04931;
-$lgreen: #EAF5E7;
-$green: #A0D294;
-$dgreen: #60BC4F;
-$orange: #E58D24;
-$blurple: #AEBCD3;
-$purple: #B944CC;
-$lpurple: #CC9BD4;
-$lblurple: #DCE2EB;
-$dblurple: #6A7A92;
-$hblurple: #73839B;
-$linecol: #D8604B;
-$salmon: #E8A381;
-
-// CHANGE 
-@font-face {
-	font-family: 'AmericanTypewriter';
-	src: url('AmericanTypewriter.eot'); /* IE */
-	src: local('assets/font/AmericanTypewriter'), url('assets/font/AmericanTypewriter.ttf') format('truetype'); /* others */
-	font-weight: normal;
-}
-
-@font-face {
-	font-family: 'American Typewriter Bold';
-	src: url('AmericanTypewriter.eot'); /* IE */
-	src: local('assets/font/American Typewriter Bold BT'), url('assets/font/American Typewriter Bold BT.ttf') format('truetype'); /* others */
-	font-weight: bold;
-}
-
-@font-face {
-	font-family: 'Lacurg';
-	src: url('lacurg__.eot'); /* IE */
-	src: local('assets/font/lacurg__'), url('assets/font/lacurg__.ttf') format('truetype'); /* others */
-	font-weight: normal;
 }
 
 .icon-close:before {
@@ -100,147 +70,104 @@ html {
 
 body {
 	height: 100%;
-	background-color: $textbeige;
+	background: $bgwhite;
 	background-image:
-		linear-gradient(to right, #F5E8D8 2px, transparent 2px),
-		linear-gradient(to bottom, #F5E8D8 2px, transparent 2px);
+		linear-gradient(to right, rgba(168, 200, 236, 0.15) 2px, transparent 2px),
+		linear-gradient(to bottom, rgba(168, 200, 236, 0.15) 2px, transparent 2px);
 	background-size: 40px 40px;
-	color: #fff;
-	font-family: "Balsamiq Sans", sans-serif;
+	color: $text-blue;
+	font-family: "Balsamiq Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 	font-weight: 400;
 	margin: 0px;
 }
 
-
-label {
-	float: left;
-	font-size: 16px;
-	margin: 12px 20px;
-	color: #E1E9F4;
-}
-
-header {
-	border-bottom: 2px solid $light;
-	height: 60px;
-	margin: 0;
-	padding: 0;
-	width: 100%;
-	background: $dgrey;
-
-	label {
-		position: relative;
-		float: left;
-		top: 0px;
-	}
-
-	#title {
-		position: relative;
-		float: left;
-		border: none;
-		background: transparent;
-		top: 10px;
-		left: 10px;
-		text-align: left;
-		font-size: 20px;
-		width: 50%;
-		font-family: "Balsamiq Sans", sans-serif;
-		color: $light;
-		font-size: 25px;
-		font-weight: 700;
-	}
-
-	#verticalBar {
-		position: relative;
-		float: right;
-		width: 3px;
-		height: 100%;
-		background: rgba(255,255,255,.1);
-	}
-	#options {
-		position: relative;
-		float: right;
-		right: 0px;
-		height: 100%;
-		min-width: 220px;
-		padding: 5px 10px 0px;
-		font-size: 20px;
-		font-family: "Balsamiq Sans", sans-serif;
-		color: $light;
-		font-size: 25px;
-		font-weight: normal;
-		transition: 200ms;
-		cursor: pointer;
-		&:hover {
-			background: rgba(255,255,225,.1);
-		}
-
-		#practiceDetails {
-			opacity: 0;
-			position: absolute;
-			margin-left: 118px;
-			right: 100px;
-			width: 100%;
-			pointer-events: none;
-	        transition: 500ms;
-
-			&.show {
-				opacity: 1;
-				width: 100%;
-				right: 0px;
+.top-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background: $dark-blue;
+	color: $cream;
+	padding: 1rem 2rem;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+	z-index: 100;
+	
+	.header-left {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		
+		#title {
+			border: none;
+			background: transparent;
+			color: $cream;
+			font-size: 1.5rem;
+			font-weight: 700;
+			font-family: "Balsamiq Sans", sans-serif;
+			width: 500px;
+			
+			&::placeholder {
+				color: rgba(253, 244, 227, 0.7);
 			}
-			#mode {
-				font-size: 12px;
+			
+			&:focus {
+				outline: 2px solid $primary-blue;
+				border-radius: 4px;
+			}
+		}
+	}
+	
+	.header-right {
+		.options-button {
+			background: rgba(255,255,255,0.1);
+			border: 1px solid rgba(255,255,255,0.2);
+			border-radius: 8px;
+			padding: 0.75rem 1rem;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			min-width: 200px;
+			
+			&:hover {
+				background: rgba(255,255,255,0.2);
+				transform: translateY(-1px);
+			}
+			
+			h5 {
+				margin: 0 0 0.5rem 0;
+				color: $cream;
+				font-size: 0.9rem;
+				font-weight: 600;
 				text-align: center;
-				margin: 5px;
 			}
-		}
-		#assessmentDetails {
-			opacity: 0;
-			left: 100px;
-			position: absolute;
-			pointer-events: none;
-			transition: 500ms;
-			&.show {
-				opacity: 1;
-				left: 20px;
-
-			}
-			.optionsDot {
-				position: relative;
-				float: left;
-				top: 10px;
-				left: 0px;
-				width: 5px;
-				height: 5px;
-				background: $medgrey;
-				border-radius: 50%;
-				transition: 200ms;
-			    h5, h6 {
-					margin: 5px;
-					color: $light;
+			
+			#assessmentDetails, #practiceDetails {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.5rem;
+				
+				h6 {
+					margin: 0;
+					color: $cream;
+					font-size: 0.8rem;
+					font-weight: 500;
 				}
-				h5 {
-					font-size: 14px;
-					text-align: center;
+				
+				.optionsDot {
+					width: 6px;
+					height: 6px;
+					background: $yellow;
+					border-radius: 50%;
 				}
 			}
-			h6 {
-				position: relative;
-				float: left;
-				left: 0px;
-				font-size: 12px;
-				margin-right: 10px;
+			
+			#practiceDetails {
+				display: none;
+				
+				&.show {
+					display: flex;
+				}
 			}
 		}
-	}
-
-	h5, h6 {
-		margin: 5px;
-		color: $light;
-	}
-	h5 {
-		font-size: 14px;
-		text-align: center;
 	}
 }
 
@@ -249,7 +176,7 @@ header {
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	background: rgba(0,0,0,.6);
+	background: rgba(0,0,0,0.7);
 	z-index: -1;
 	transition: 500ms ease;
 	&.dim {
@@ -260,7 +187,7 @@ header {
 
 #creatorBody {
 	position: absolute;
-	top: 70px;
+	top: 80px;
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -271,7 +198,7 @@ header {
 		position: relative;
 		height: 100%;
 		top: -8px;
-		padding: 25px 15px 40px 15px;
+		padding: 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -280,23 +207,23 @@ header {
 
 		#columnSection {
 			opacity: 1;
-	    	transition: 200ms ease;
+			transition: 200ms ease;
 			&.hidden {
 				opacity: 0;
 			}
 			display: flex;
 			justify-content: center;
 			align-items: flex-end;
-			margin-bottom: 20px;
+			margin-bottom: 2rem;
 			width: 800px;
 			gap: 120px;
 
 			.tileColumnTitle {
 				width: 380px;
 				text-align: center;
-				font-size: 32px;
+				font-size: 2rem;
 				font-weight: 700;
-				color: $textblue;
+				color: $dark-blue;
 				margin: 0;
 				position: relative;
 				left: 0;
@@ -305,42 +232,34 @@ header {
 
 		#addSliderButton {
 			position: relative;
-			height: 40px;
-			width: 164px;
+			height: 50px;
+			width: 180px;
 			margin: 0 auto;
-			padding-top: 20px;
+			padding: 0 1.5rem;
 			text-align: center;
-			background: $buttonblue url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-			background-blend-mode: overlay;
-			transform: translateY(-2px) rotate(-0.5deg);
-			box-shadow: 
-				inset 0 1px 5px rgba(198, 130, 57, 0.358),
-				inset 0 -1px 5px rgba(2, 41, 109, 0.1),
-				8px 4px 6px rgba(151,90,52,0.25);
-			border-radius: 10px;
-			transition: 200ms ease;
+			background: $primary-blue;
+			color: white;
+			border: none;
+			border-radius: 25px;
+			font-size: 1.1rem;
+			font-weight: 600;
+			box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+			transition: all 0.2s ease;
 			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			
 			&:hover {
-				transform: translateY(-1px) rotate(0deg);
-				box-shadow: 
-					inset 0 1px 1px rgba(255,255,255,0.2),
-					inset 0 -1px 1px rgba(0,0,0,0.1),
-					10px 5px 3px rgba(151,90,52,0.32),
-					inset 0 0 0 2px rgba(0,0,0,0.1);
-				background:  #00366A;
+				background: $dark-blue;
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
 			}
+			
 			&:active {
-				transform: translateY(1px) rotate(0deg);
-				box-shadow: 
-					inset 0 1px 1px rgba(255,255,255,0.2),
-					inset 0 -1px 1px rgba(0,0,0,0.1),
-					5px 2px 1px rgba(151,90,52,0.18),
-					inset 0 0 0 2px rgba(0,0,0,0.1);
+				transform: translateY(0);
 			}
-			&.icon-plus {
-				position: absolute;
-				margin-right: 10px;
-			}
+			
 			&.slide {
 				transform: translateY(0px);
 			}
@@ -348,29 +267,34 @@ header {
 
 		.arrow {
 			position: absolute;
-			width: 150px;
-			height: 70px;
-			top: 60px;
-			left: 290px;
+			width: 200px;
+			height: 60px;
+			top: 80px;
+			left: 50%;
+			transform: translateX(-50%);
 			text-align: center;
-			padding-right: 15px;
-			margin-left: 500px;
-			background: $salmon;
-	        transition: 200ms ease;
+			padding: 1rem;
+			background: $yellow;
+			border-radius: 30px;
+			transition: 200ms ease;
 			display: none;
-			color: $textblue;
-			box-shadow: 0 8px 4px rgba(134, 58, 7, 0.361);
+			color: $text-blue;
+			box-shadow: 0 4px 12px rgba(240, 156, 39, 0.3);
+			font-weight: 600;
+			
 			&:before {
 				content: "";
 				position: absolute;
 				width: 0;
 				height: 0;
-				left: -59px;
-				top: -23px;
-				border-top: 60px solid transparent;
-				border-bottom: 60px solid transparent;
-				border-right: 60px solid $salmon;
+				left: -20px;
+				top: 50%;
+				transform: translateY(-50%);
+				border-top: 15px solid transparent;
+				border-bottom: 15px solid transparent;
+				border-right: 20px solid $yellow;
 			}
+			
 			&.show {
 				display: block;
 				animation: Nudge 1s infinite;
@@ -379,60 +303,38 @@ header {
 
 		.smallarrow {
 			position: relative;
-			width: 150px;
+			width: 200px;
 			height: 50px;
-			background: $salmon;
-			border: 2px solid $salmon;
-			padding: 0px 5px;
+			background: $yellow;
+			border: none;
+			padding: 1rem;
 			text-align: center;
-			border-radius: 5px;
-			margin-right: 420px;
-			margin-top: 20px;
+			border-radius: 25px;
+			margin: 1rem auto;
 			animation: upbump 1s infinite;
 			display: none;
-			box-shadow: 0 5px 5px rgba(187, 78, 4, 0.5);
-			color: $textblue;
+			box-shadow: 0 4px 12px rgba(240, 156, 39, 0.3);
+			color: $text-blue;
+			font-weight: 600;
+			
 			&.show {
 				display: block;
 			}
-		}
-		.smallarrow:after, .smallarrow:before {
-			bottom: 100%;
-			left: 50%;
-			border: solid transparent;
-			content: " ";
-			height: 0;
-			width: 0;
-			position: absolute;
-			pointer-events: none;
-		}
-
-		.smallarrow:after {
-			border-color: rgba(185, 68, 204, 0);
-			border-bottom-color: #B944CC;
-			border-width: 20px;
-			margin-left: -20px;
-		}
-		.smallarrow:before {
-			border-color: rgba(185, 68, 204, 0);
-			border-bottom-color: #B944CC;
-			border-width: 23px;
-			margin-left: -23px;
 		}
 
 		.tileInfoSlider {
 			opacity: 0;
 			clear: both;
 			position: relative;
-			height: 180px;
-			width: 1020px;
-			margin: 40px auto;
+			height: 200px;
+			width: 1000px;
+			margin: 2rem auto;
 			transform: translateY(10px);
 			transition: 300ms 50ms;
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			gap: 40px;
+			gap: 2rem;
 			overflow: visible;
 
 			&.appear {
@@ -456,31 +358,32 @@ header {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					color: $light;
+					color: white;
 					text-align: center;
-					background: $titleblue;
+					background: $dark-blue;
 					padding: 0;
 					height: 70px;
 					width: 70px;
 					margin-left: 40px;
 					margin-top: 35px;
-					font-size: 38px;
+					font-size: 2rem;
 					font-family: "Balsamiq Sans", sans-serif;
 					border-radius: 50%;
+					box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 				}
 			}
+			
 			.tile {
 				position: relative;
 				height: 187px;
 				width: 380px;
-				border-radius: 8px;
-				background: url("assets/tile.png") 0 0;
-				background-size: cover;
-				background-position: center;
-				box-shadow: 0 4px 3px -3px #02092a;
+				border-radius: 12px;
+				background: $dark-blue;
+				box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				border: 2px solid $dark-blue;
 
 				.tile-text {
 					background: transparent;
@@ -489,38 +392,42 @@ header {
 					position: relative;
 					height: 90px;
 					width: 330px;
-					padding: 15px;
-					color: $textbeige;
+					padding: 1rem;
+					color: white;
 					font-family: "Balsamiq Sans", sans-serif;
 					text-align: center;
 					vertical-align: middle;
-					font-size: 25px;
+					font-size: 1.3rem;
 					transition: 100ms ease;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					margin: 0 auto;
+					font-weight: 600;
 
 					&:focus {
-						color: $textbeige;
+						color: white;
+						outline: 2px solid $yellow;
+						border-radius: 8px;
 					}
 				}
 			}
+			
 			.optionalInfo {
 				position: relative;
 				height: 187px;
 				width: 380px;
 				padding: 0;
-				background: url("assets/optional.png") 0 0;
-				background-size: cover;
-				background-position: center;
-				box-shadow: 0 4px 3px -3px #3270ab;
-				color: $textbeige;
-				border-radius: 8px;
+				background: $yellow;
+				box-shadow: 0 4px 12px rgba(250, 220, 100, 0.3);
+				color: $text-blue;
+				border-radius: 12px;
 				display: flex;
 				align-items: center;
 				margin-right: 0;
 				justify-content: center;
+				border: 2px solid darken($yellow, 20%);
+				
 				&:before {
 					content: "";
 					position: absolute;
@@ -530,7 +437,9 @@ header {
 					height: 0;
 					border-top: 20px solid transparent;
 					border-bottom: 20px solid transparent;
+					border-right: 20px solid $yellow;
 				}
+				
 				textarea {
 					background: transparent;
 					border: none;
@@ -538,20 +447,23 @@ header {
 					position: relative;
 					height: 90px;
 					width: 330px;
-					padding: 15px;
-					color: $textblue;
+					padding: 1rem;
+					color: $text-blue;
 					font-family: "Balsamiq Sans", sans-serif;
 					text-align: center;
 					vertical-align: middle;
-					font-size: 25px;
+					font-size: 1.3rem;
 					transition: 100ms ease;
 					display: flex;
 					align-items: center;
 					justify-content: center;
 					margin: 0 auto;
+					font-weight: 600;
 
 					&:focus {
-						color: $textblue;
+						color: $text-blue;
+						outline: 2px solid $primary-blue;
+						border-radius: 8px;
 					}
 				}
 			}
@@ -560,7 +472,7 @@ header {
 				position: absolute;
 				left: 152px;
 				top: -8px;
-				background: $dgreen;
+				background: $yellow;
 				height: 2px;
 				width: 5px;
 				transition: all 200ms;
@@ -568,31 +480,32 @@ header {
 
 			.delete {
 				position: relative;
-				width: 30px;
-				height: 30px;
-				background: $buttonblue;
+				width: 40px;
+				height: 40px;
+				background: #dc3545;
+				border: none;
 				border-radius: 50%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-size: 16px;
-				color: $textbeige;
-				box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+				font-size: 1.2rem;
+				color: white;
+				box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 				transition: all 0.2s ease;
 				cursor: pointer;
-				opacity: 0.8;
 				
 				&:hover {
-					background: darken($buttonblue, 10%);
+					background: darken(#dc3545, 10%);
 					transform: scale(1.1);
-					color: $red;
+					box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 				}
 
 				&:before {
 					content: "×";
-					font-size: 24px;
+					font-size: 1.5rem;
 					line-height: 1;
-					color: $textbeige;
+					color: white;
+					font-weight: bold;
 				}
 			}
 			
@@ -604,27 +517,29 @@ header {
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				gap: 20px;
+				gap: 1rem;
 			}
 
 			.addTileDot {
 				position: relative;
-				width: 30px;
-				height: 30px;
-				background: $buttonblue;
+				width: 40px;
+				height: 40px;
+				background: $primary-blue;
+				border: none;
 				border-radius: 50%;
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				font-size: 16px;
-				color: $textbeige;
-				box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+				font-size: 1.2rem;
+				color: white;
+				box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
 				transition: all 0.2s ease;
 				cursor: pointer;
 				
 				&:hover {
-					background: darken($buttonblue, 30%);
+					background: $dark-blue;
 					transform: scale(1.1);
+					box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 					
 					& ~ .tile-line {
 						opacity: 1;
@@ -633,8 +548,8 @@ header {
 				}
 				
 				.icon-plus {
-					font-size: 16px;
-					color: $textbeige;
+					font-size: 1.2rem;
+					color: white;
 					display: flex;
 					align-items: center;
 					justify-content: center;
@@ -646,232 +561,288 @@ header {
 		}
 	}
 }
+
 .tile-line {
-    opacity: 0;
-    position: absolute;
-    left: -800px;
-    top: -50px;
-    background: $linecol;
-    height: 7px;
-    width: 5px;
-    transition: all 0.2s ease;
-}
-#optionsPopup {
-	display: none;
-	&.show {
-		display: inline;
-	}
+	opacity: 0;
+	position: absolute;
+	left: -800px;
+	top: -50px;
+	background: $primary-blue;
+	height: 7px;
+	width: 5px;
+	transition: all 0.2s ease;
 }
 
-#startPopup {
-	display: none;
-	&.show {
-		display: inline;
-	}
-}
-
+// Popup styling matching player page
 .popup {
-	width: 635px;
-	left: 50%;
-	top: 50%;
-	margin-left: -317px;
-	margin-top: -210px;
-	padding: 15px;
 	position: fixed;
-	border: solid 1px #777;
-	border-radius: 12px;
-	z-index: 100;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.7);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 200;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
 
-	text-align: left;
-	font-weight: 400;
-	font-size: 17px;
-
-	box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-	color: $textblue;
-	background: url('assets/pop.png') no-repeat center center;
-	background-size: cover;
-
-
-	h1 {
-		font-size: 30px;
-		font-weight: 700;
-		color: $textblue;
-		margin: 5px 0px;
+	&.show {
+		opacity: 1;
+		visibility: visible;
 	}
 
-	.section {
+	.popup-content {
+		background: white;
+		background-image:
+			linear-gradient(to right, rgba(168, 200, 236, 0.15) 2px, transparent 2px),
+			linear-gradient(to bottom, rgba(168, 200, 236, 0.15) 2px, transparent 2px);
+		background-size: 40px 40px;
+		border: 2px solid $primary-blue;
+		border-radius: 12px;
+		padding: 0;
+		box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+		max-width: 90vw;
+		max-height: 90vh;
+		text-align: center;
 		position: relative;
-		float: left;
-		height: 50px;
-		width: 100%;
-
-		h4 {
-			position: relative;
-			float: left;
-			height: 50px;
-			font-weight: 700;
-			color: $textblue;
-		}
-
-		#modeContainer {
-			position: relative;
-			float: right;
-			height: 40px;
-			width: 240px;
-			background: $medblue;
-			border-radius: 3px;
-			box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,.1);
-			cursor: pointer;
-
-	        #modeSlider {
-	        	position: absolute;
-				left: 120px;
-				height: 100%;
-				width: 50%;
-				background: $buttonblue;
-				border-radius: 3px;
-				transition: 500ms ease-in-out;
-
-		        &.slide {
-		        	display: hidden;
-		        	transform: translateX(-120px);
-		        }
-	        }
-			#practiceMode {
-				position: absolute;
-				left: 0px;
-				height: 100%;
-				width: 50%;
-				color: $light;
-				line-height: 40px;
-				vertical-align: center;
-				text-align: center;
-				pointer-events: none;
-				border-radius: 3px;
+		overflow: hidden;
+		
+		.popup-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1rem 1.5rem;
+			border-bottom: 1px solid $gray-200;
+			background: $primary-blue;
+			color: white;
+			border-radius: 10px 10px 0 0;
+			
+			h1, h2 {
+				margin: 0;
+				font-size: 1.5rem;
+				font-weight: 600;
+				color: white;
 			}
-			#assessmentMode {
-				position: absolute;
-				right: 0px;
-				float: right;
-				height: 100%;
-				width: 50%;
-				color: $light;
-				line-height: 40px;
-				vertical-align: center;
-				text-align: center;
-				pointer-events: none;
-				pointer-events: none;
-				border-radius: 3px;
+			
+			.popup-close {
+				background: none;
+				border: none;
+				color: white;
+				font-size: 1.5rem;
+				font-weight: bold;
+				cursor: pointer;
+				padding: 0;
+				width: 30px;
+				height: 30px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 50%;
+				transition: all 0.2s ease;
+				
+				&:hover {
+					background: rgba(255,255,255,0.2);
+				}
 			}
 		}
-	}
-	#assessmentOptions {
-		opacity: .3;
-		pointer-events: none;
-		transition: 400ms ease;
-		&.show {
-			opacity: 1;
-			pointer-events: auto;
-		}
-
-		.section {
-			position: relative;
-			float: left;
-			height: 100px;
-			width: 100%;
+		
+		.popup-body {
+			padding: 1.5rem;
+			max-height: 70vh;
+			overflow-y: auto;
+			text-align: left;
 
 			h4 {
-				position: relative;
-				float: left;
-				height: 50px;
+				margin: 0 0 1rem 0;
+				color: $dark-blue;
+				font-size: 1.2rem;
+				font-weight: 600;
 			}
-			input {
-				position: relative;
-				float: left;
-				top: 17px;
-				left: 30px;
-				height: 30px;
-				width: 50px;
-				border: none;
-				color: $blue;
-				font-size: 16px;
-				text-align: center;
-				border: none;
-				background: rgba(0,0,0,.1);
-				border-radius: 3px;
-			}
-			p {
-				position: absolute;
-				top: 35px;
-			}
-			.after {
-				left: 40px;
-			}
-		}
-	}
 
-	.closeWindow {
-		clear: both;
-		display: inline-block;
-		width: 22%;
-		height: 40px;
-		color: $textbeige;
-		background: $buttonblue;
-		line-height: 40px;
-		text-align: center;
-		vertical-align: center;
-		border-radius: 3px;
-		transition: 200ms ease;
-		cursor: pointer;
-		&:hover {
-			box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,.1);
-			background: darken($buttonblue, 10%);
+			p {
+				margin: 0 0 1rem 0;
+				color: $gray-700;
+				font-size: 1rem;
+				line-height: 1.4;
+			}
+
+			.section {
+				position: relative;
+				margin-bottom: 1.5rem;
+				
+				#modeContainer {
+					position: relative;
+					height: 40px;
+					width: 240px;
+					background: $gray-200;
+					border-radius: 8px;
+					box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,.1);
+					cursor: pointer;
+					overflow: hidden;
+
+					#modeSlider {
+						position: absolute;
+						left: 120px;
+						height: 100%;
+						width: 50%;
+						background: $primary-blue;
+						border-radius: 8px;
+						transition: 500ms ease-in-out;
+
+						&.slide {
+							transform: translateX(-120px);
+						}
+					}
+					
+					#practiceMode, #assessmentMode {
+						position: absolute;
+						height: 100%;
+						width: 50%;
+						color: $gray-700;
+						line-height: 40px;
+						text-align: center;
+						pointer-events: none;
+						border-radius: 8px;
+						font-weight: 600;
+					}
+					
+					#practiceMode {
+						left: 0px;
+					}
+					
+					#assessmentMode {
+						right: 0px;
+						
+						&.active {
+							color: white;
+						}
+					}
+				}
+				
+				input[type="number"] {
+					height: 40px;
+					width: 80px;
+					border: 2px solid $gray-300;
+					color: $text-blue;
+					font-size: 1rem;
+					text-align: center;
+					background: white;
+					border-radius: 8px;
+					margin: 0 1rem;
+					
+					&:focus {
+						outline: none;
+						border-color: $primary-blue;
+					}
+				}
+			}
+			#assessmentOptions {
+				opacity: 1;
+				pointer-events: auto;
+				transition: 400ms ease;
+				
+				&.active {
+					opacity: 0.3;
+					pointer-events: none;
+				}
+			}
+			.textLeft {
+				float: left;
+				width: 100%;
+				padding-right: 0;
+			}
+			#inputTitle {
+				display: block;
+				width: 100%;
+				height: 45px;
+				margin: 1rem 0;
+				padding: 0 1rem;
+				text-align: left;
+				font-size: 1rem;
+				font-family: "Balsamiq Sans", sans-serif;
+				font-weight: 400;
+				background: white;
+				border: 2px solid $gray-300;
+				border-radius: 8px;
+				color: $text-blue;
+				transition: all 0.2s ease;
+				
+				&:focus {
+					outline: none;
+					border-color: $primary-blue;
+					box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+				}
+			}
 		}
-	}
-	.centeredButton {
-		position: relative;
-		left: 39%;
-	}
-	.rightButton {
-		float: right;
-	}
-	#lowerLine {
-		clear: both;
-		font-weight: 700;
-	}
-	#inputTitle {
-		display: inline-block;
-		height: 33px;
-		width: 70%;
-		margin-right: 10px;
-		padding: 0px 10px;
-		text-align: left;
-		font-size: 16px;
-		font-family: "Balsamiq Sans", sans-serif;
-		font-weight: 400;
-		background: transparent;
-		border: 2px solid $textblue;
-		border-radius: 6px;
-		color: $textblue;
-		transition: all 0.2s ease;
-	}
-	.textLeft {
-		float: left;
-		width: 40%;
-		padding-right: 10px;
-	}
-	.photoRight {
-		float: right;
-		img {
-			position: relative;
-			float: left;
-			width: 325px;
+		
+		.popup-footer {
+			padding: 1rem 1.5rem;
+			border-top: 1px solid $gray-200;
+			background: $gray-100;
+			display: flex;
+			justify-content: center;
+			gap: 1rem;
 		}
 	}
 }
 
+.action-button {
+	padding: 0.75rem 1.5rem;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	position: relative;
+	overflow: hidden;
+	text-align: center;
+	font-family: "Balsamiq Sans", sans-serif;
+	
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: repeating-linear-gradient(
+			45deg,
+			transparent,
+			transparent 2px,
+			rgba(255,255,255,0.1) 2px,
+			rgba(255,255,255,0.1) 4px
+		);
+	}
+	
+	&:hover, &:focus {
+		transform: translateY(-2px);
+		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	}
+	
+	&.primary-button {
+		background: $primary-blue;
+		color: white;
+		
+		&:hover, &:focus {
+			background: $dark-blue;
+		}
+	}
+	
+	&.secondary-button {
+		background: $gray-500;
+		color: white;
+		
+		&:hover, &:focus {
+			background: $gray-600;
+		}
+	}
+}
 
-/***********ARROW NUDGE*************/
+// Animation keyframes
 @keyframes Nudge {
 	0% 	{ transform: translateX(0px) }
 	50% { transform: translateX(20px) }
@@ -882,5 +853,53 @@ header {
 	0% 	{ transform: translateY(0px) }
 	50% { transform: translateY(20px) }
 	100%{ transform: translateY(0px) }
+}
+
+@media (max-width: 768px) {
+	.top-header {
+		padding: 1rem;
+		
+		.header-left {
+			#title {
+				width: 200px;
+				font-size: 1.2rem;
+			}
+		}
+		
+		.header-right {
+			.options-button {
+				min-width: 150px;
+			}
+		}
+	}
+	
+	#creatorBody #tileSection {
+		padding: 1rem;
+		
+		.tileInfoSlider {
+			width: 95%;
+			flex-direction: column;
+			height: auto;
+			gap: 1rem;
+			
+			.tile, .optionalInfo {
+				width: 100%;
+				max-width: 350px;
+			}
+		}
+	}
+	
+	.popup .popup-content {
+		margin: 1rem;
+		max-width: calc(100vw - 2rem);
+		
+		.popup-body {
+			.textLeft, .photoRight {
+				float: none;
+				width: 100%;
+				margin-bottom: 1rem;
+			}
+		}
+	}
 }
 

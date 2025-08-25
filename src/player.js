@@ -87,11 +87,8 @@ Namespace('Sequencer').Engine = (function() {
 		const theTiles = _makeTiles(_qset.items);
 		const tBoard = _.template($('#t-board').html());
 
-		// Color each word in the title individually
-		const colorTitle = _colorWordsInTitle(title);
-
 		_$board = $(tBoard({
-			title: colorTitle,
+			title: title,
 			tiles: theTiles,
 			score: "0%",
 			penalty: ~~_qset.options.penalty,
@@ -111,8 +108,6 @@ Namespace('Sequencer').Engine = (function() {
 			$('#practiceMode-info').addClass('hidden');
 		}
 
-		// Resize the title if needed
-		_resizeTitle(_qset.name.length);
 		_setupSortableJS();
 		_setupEventListeners();
 
@@ -702,46 +697,9 @@ Namespace('Sequencer').Engine = (function() {
 	};
 
 
-	var _resizeTitle = function(length) {
-		if (length < 20) {
-			return $('.words').css({'font-size': 30+'px'});
-		} else if (length < 25) {
-			return $('.words').css({'font-size': 23+'px'});
-		} else if (length < 32) {
-			return $('.words').css({'font-size': 21+'px'});
-		} else if (length < 40) {
-			return $('.words').css({'font-size': 19+'px'});
-		} else if (length < 45) {
-			return $('.words').css({'font-size': 17+'px'});
-		} else {
-			return $('.words').css({'font-size': 14+'px'});
-		}
-	};
 
-	// Sets each word in the title to a different color
-	var _colorWordsInTitle = function(title) {
-		if ((title === undefined) || null) {
-			title = 'Widget Title Goes Here';
-		}
-		const titleWords = title.split(' ');
-		let colorTitle = [];
-		let index = 0;
-		for (var i of Array.from(titleWords)) {
-			var rem = index % 3;
-			if (index !== 0) {
-				colorTitle += " ";
-			}
-			if (rem === 0) {
-				colorTitle += '<span h1 class="words color1">'+i+'</h1>';
-			} else if (rem === 1) {
-				colorTitle += '<span h1 class="words color1">'+i+'</h1>';
-			} else if (rem === 2) {
-				colorTitle += '<span h1 class="words color1">'+i+'</h1>';
-			}
-			index++;
-		}
-		return colorTitle; 
-	};
+
+
 
 	// All tiles have been moved to the orderArea
 	var _tilesSequenced = function() {
@@ -941,7 +899,7 @@ Namespace('Sequencer').Engine = (function() {
 		if (tile.clue === '') {
 		} 
 		else {
-			tileLabel = tileLabel + ' This tile has a clue, click the star icon to review it.';
+			tileLabel = tileLabel + ' This tile has a clue, click the question mark icon to review it.';
 		}
 		// Add view mode information
 		if (_isListView) {

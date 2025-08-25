@@ -122,13 +122,16 @@ Namespace('Sequencer').Creator = (function() {
 			$('#optionsPopup').addClass('show');
 			return $('#fader').addClass('dim');
 		});
-
+		$('.popup-close').on('click', function() {
+			$(this).closest('.popup').removeClass('show');
+			$('#fader').removeClass('dim');
+		});
 		$('.closeWindow').on('click', function() {
-			$(this).parent().removeClass('show');
+			$(this).closest('.popup').removeClass('show');
 			$('#fader').removeClass('dim');
 
 			// Set the title
-			if ($(this).parent().attr('id') === 'startPopup') {
+			if ($(this).closest('.popup').attr('id') === 'startPopup') {
 				title = $('#inputTitle').val();
 				if (title === '') { title = 'My Sequencer Widget'; }
 				$('#title').val(title);
@@ -166,14 +169,12 @@ Namespace('Sequencer').Creator = (function() {
 			$('#assessmentDetails').toggleClass('show');
 		}
 		$('#numTries').html($('#numTriesInput').val() + ' guesses');
-		$('#penalty').html($('#penaltyInput').val() + 'pt Penalty');
 
 		// Some set of questions already exists
 		if (_qset != null) {
 			const questions = _qset.items;
 			for (var question of Array.from(questions)) { _addQuestion(question); }
 
-			$('#penaltyInput').val(_qset.options != null ? _qset.options.penalty : undefined);
 			$('#numTriesInput').val(_qset.options != null ? _qset.options.freeAttempts : undefined);
 			return $('#numTries').html($('#numTriesInput').val() + ' guesses');
 		}
@@ -256,7 +257,6 @@ Namespace('Sequencer').Creator = (function() {
 		} else {
 			_qset.options.practiceMode = false;
 		}
-		_qset.options.penalty = $('#penaltyInput').val();
 		_qset.options.freeAttempts = $('#numTriesInput').val() || 1;
 		_qset.name = $('#title').val();
 

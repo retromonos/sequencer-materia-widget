@@ -23,23 +23,23 @@
 
 	<body>
 		<div id="fader" class="dim"></div>
-		<header>
-			<label>
-				<img src="assets/materialogo.png"></img>
-			</label>
-			<input type="text" id="title" placeholder="My Sequencer Widget"/>
-			<div id="options">
-				<h5> Mode Options</h5>
-				<div id="assessmentDetails" class="show">
-					<h6 id="mode">Assessment Mode</h6>
-					<div class="optionsDot"></div>
-					<h6 id="numTries">10 guesses</h6>
-				</div>
-				<div id="practiceDetails">
-					<h6 id="mode">Practice Mode</h6>
+		<header class="top-header">
+			<div class="header-left">
+				<input type="text" id="title" placeholder="My Sequencer Widget"/>
+			</div>
+			<div class="header-right">
+				<div id="options" class="options-button">
+					<h5>Mode Options</h5>
+					<div id="assessmentDetails" class="show">
+						<h6 id="mode">Assessment Mode</h6>
+						<div class="optionsDot"></div>
+						<h6 id="numTries">10 guesses</h6>
+					</div>
+					<div id="practiceDetails">
+						<h6 id="mode">Practice Mode</h6>
+					</div>
 				</div>
 			</div>
-			<div id="verticalBar"></div>
 		</header>
 		<div id="creatorBody">
 			<div id="tileSection">
@@ -47,7 +47,7 @@
 					<h1 class="tileColumnTitle">Tile</h1>
 					<h1 class="tileColumnTitle">Optional Information</h1>
 				</section>
-				<div id="addSliderButton">
+				<div id="addSliderButton" class="add-tile-button">
 					<div class="icon-plus main"></div>
 					Add Tile
 				</div>
@@ -87,41 +87,56 @@
 
 		<!-- options -->
 		<div id="optionsPopup" class="popup">
-			<h2>Options</h2>
-			<div class="section">
-				<h4 id="gameModeTitle">Choose a mode:</h4>
-				<div id="modeContainer">
-					<div id="modeSlider"></div>
-					<div id="practiceMode">Practice</div>
-					<div id="assessmentMode" class="active">Assessment</div>
+			<div class="popup-content">
+				<div class="popup-header">
+					<h2>Options</h2>
+					<button class="popup-close" aria-label="Close options">×</button>
+				</div>
+				<div class="popup-body">
+					<div class="section">
+						<h4 id="gameModeTitle">Choose a mode:</h4>
+						<div id="modeContainer">
+							<div id="modeSlider"></div>
+							<div id="practiceMode">Practice</div>
+							<div id="assessmentMode" class="active">Assessment</div>
+						</div>
+					</div>
+					<p>In <b>practice mode</b>, students will have unlimited tries to submit the correct sequence. Every student who submits the correct sequence will receive a perfect score.</p>
+					<p>In <b>assessment mode</b>, students will have a variable number of guesses to submit the correct sequence, after which the highest percentage of correct placements will be used as a score.</p>
+					<div id="assessmentOptions" class="show">
+						<div class="section">
+							<h4>Number of guesses</h4>
+							<input type="number" id="numTriesInput" value="10" min="1" max="100">
+							<p>Students will have this many tries to guess the correct sequence.</p>
+						</div>
+					</div>
+				</div>
+				<div class="popup-footer">
+					<button class="action-button primary-button closeWindow">Close</button>
 				</div>
 			</div>
-			<p>In <b>practice mode</b>, students will have unlimited tries to submit the correct sequence. Every student who submits the correct sequence will receive a perfect score.</p>
-			<p>In <b>assessment mode</b>, students will have a variable number of guesses to submit the correct sequence, after which the highest percentage of correct placements will be used as a score.</p>
-			<div id="assessmentOptions" class="show">
-				<div class="section">
-					<h4>Number of guesses</h4>
-					<input type="number" id="numTriesInput" value="10" min="1" max="100">
-					<p>Students will have this many tries to guess the correct sequence.</p>
-				</div>
-			</div>
-			<div class="closeWindow centeredButton">Close</div>
 		</div>
 
 		<!-- initial popup -->
 		<div id="startPopup" class="popup">
-			<aside class="textLeft">
-				<h1>Sequencer</h1>
-				<p>Create a sequence that students will put in order.</p>
-				<p>In <b>practice mode</b> students have unlimited tries to get the correct sequence.</p>
-				<p>In <b>assessment mode</b> you can define scoring options to determine their score.</p>
-			</aside>
-			<aside class="photoRight">
-				<img src="assets/SequencerScreenShot.png"/>
-			</aside>
-			<h4 id="lowerLine">Start by giving your Sequencer widget a title:</h4>
-			<input id="inputTitle" type="text" placeholder="My Sequencer Widget"/>
-			<div class="closeWindow rightButton">Get Started</div>
+			<div class="popup-content">
+				<div class="popup-header">
+					<h1>Sequencer</h1>
+					<button class="popup-close" aria-label="Close start popup">×</button>
+				</div>
+				<div class="popup-body">
+					<aside class="textLeft">
+						<p>Create a sequence that students will put in order.</p>
+						<p>In <b>practice mode</b> students have unlimited tries to get the correct sequence.</p>
+						<p>In <b>assessment mode</b> you can define scoring options to determine their score.</p>
+					</aside>
+					<h4 id="lowerLine">Start by giving your Sequencer widget a title:</h4>
+					<input id="inputTitle" type="text" placeholder="My Sequencer Widget"/>
+				</div>
+				<div class="popup-footer">
+					<button class="action-button primary-button closeWindow">Get Started</button>
+				</div>
+			</div>
 		</div>
 
 <!-- INITIALIZE -->
