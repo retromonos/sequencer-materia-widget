@@ -476,7 +476,7 @@ Namespace('Sequencer').Engine = (function() {
 	// Keyboard navigation
 	const _keyDownEvent = function(e) {
 		const tileId = parseInt(e.target.getAttribute('data-id'), 10);
-		const isInSequence = _sequence.indexOf(tileId) !== -1;
+		const isInSequence = _sequence.indexOf(tileId) !== -1;orderInstructions
 		const sequenceIndex = _sequence.indexOf(tileId);
 
 		switch (e.key) {
@@ -607,9 +607,15 @@ Namespace('Sequencer').Engine = (function() {
 		
 		// Insert at new position
 		_sequence.splice(newIndex, 0, tileId);
-		
+		console.log(_sequence, currentIndex, newIndex)
 		// Update DOM
-		orderArea.insertBefore(tileElement, orderArea.children[newIndex]);
+		
+		if(orderArea.children[newIndex]) {
+			if(newIndex > currentIndex)
+				orderArea.children[newIndex].insertAdjacentElement('afterend', tileElement)
+			else
+				orderArea.children[newIndex].insertAdjacentElement('beforebegin', tileElement)
+		}
 		
 		_updatePositionIndicators();
 		_setAriaLabelsForTiles();
