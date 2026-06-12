@@ -39,7 +39,7 @@ $gray-900: #1A202C;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-	font-family: 'icomoon';
+	// font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
@@ -56,7 +56,7 @@ $gray-900: #1A202C;
 	content: "\e600";
 }
 .icon-plus:before {
-	content: "\e601";
+	content: "+";
 	&.main {
 		margin-right: 10px;
 	}
@@ -104,6 +104,8 @@ body {
 			font-weight: 700;
 			font-family: "Balsamiq Sans", sans-serif;
 			width: 500px;
+			padding-bottom: 4px;
+			border-bottom: 2px dotted #FDF4E380;
 			
 			&::placeholder {
 				color: rgba(253, 244, 227, 0.7);
@@ -126,9 +128,14 @@ body {
 			transition: all 0.2s ease;
 			min-width: 200px;
 			
-			&:hover {
+			&:hover, &:focus-visible {
 				background: rgba(255,255,255,0.2);
 				transform: translateY(-1px);
+			}
+
+			&:focus-visible {
+				outline: 3px solid $orange;
+				outline-offset: 2px;
 			}
 			
 			h5 {
@@ -140,7 +147,7 @@ body {
 			}
 			
 			#assessmentDetails, #practiceDetails {
-				display: flex;
+				display: none;
 				align-items: center;
 				justify-content: center;
 				gap: 0.5rem;
@@ -158,11 +165,7 @@ body {
 					background: $yellow;
 					border-radius: 50%;
 				}
-			}
-			
-			#practiceDetails {
-				display: none;
-				
+
 				&.show {
 					display: flex;
 				}
@@ -213,10 +216,12 @@ body {
 			}
 			display: flex;
 			justify-content: center;
+			gap: 2rem;
 			align-items: flex-end;
-			margin-bottom: 2rem;
+			margin-bottom: 1.5rem;
+			margin-top: 0.5rem;
 			width: 800px;
-			gap: 120px;
+			margin-left: 12px;
 
 			.tileColumnTitle {
 				width: 380px;
@@ -243,17 +248,22 @@ body {
 			border-radius: 25px;
 			font-size: 1.1rem;
 			font-weight: 600;
-			box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+			// box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 			transition: all 0.2s ease;
 			cursor: pointer;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			
-			&:hover {
+			&:hover, &:focus-visible {
 				background: $dark-blue;
 				transform: translateY(-2px);
 				box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+			}
+
+			&:focus-visible {
+				outline: 3px solid $orange;
+				outline-offset: 2px;
 			}
 			
 			&:active {
@@ -268,9 +278,10 @@ body {
 		.arrow {
 			position: absolute;
 			width: 200px;
-			height: 60px;
-			top: 80px;
-			left: 50%;
+			pointer-events: none;
+			// height: 60px;
+			top: 102px;
+			left: 60%;
 			transform: translateX(-50%);
 			text-align: center;
 			padding: 1rem;
@@ -279,20 +290,24 @@ body {
 			transition: 200ms ease;
 			display: none;
 			color: $text-blue;
-			box-shadow: 0 4px 12px rgba(240, 156, 39, 0.3);
+			// box-shadow: 0 4px 12px rgba(240, 156, 39, 0.3);
 			font-weight: 600;
 			
+			p {
+				margin: 0;
+			}
+
 			&:before {
 				content: "";
 				position: absolute;
 				width: 0;
 				height: 0;
-				left: -20px;
+				left: -12px;
 				top: 50%;
 				transform: translateY(-50%);
-				border-top: 15px solid transparent;
-				border-bottom: 15px solid transparent;
-				border-right: 20px solid $yellow;
+				border-top: 8px solid transparent;
+				border-bottom: 8px solid transparent;
+				border-right: 15px solid $yellow;
 			}
 			
 			&.show {
@@ -304,7 +319,7 @@ body {
 		.smallarrow {
 			position: relative;
 			width: 200px;
-			height: 50px;
+			// height: 50px;
 			background: $yellow;
 			border: none;
 			padding: 1rem;
@@ -316,6 +331,10 @@ body {
 			box-shadow: 0 4px 12px rgba(240, 156, 39, 0.3);
 			color: $text-blue;
 			font-weight: 600;
+
+			p {
+				margin: 0;
+			}
 			
 			&.show {
 				display: block;
@@ -326,9 +345,10 @@ body {
 			opacity: 0;
 			clear: both;
 			position: relative;
-			height: 200px;
+			// height: 200px;
 			width: 1000px;
-			margin: 2rem auto;
+			// margin: 2rem auto;
+			margin-bottom: 1.5rem;
 			transform: translateY(10px);
 			transition: 300ms 50ms;
 			display: flex;
@@ -349,10 +369,10 @@ body {
 
 			.block {
 				position: relative;
-				height: 140px;
-				width: 150px;
+				height: 70px;
+				width: 70px;
 				margin-bottom: 0;
-				margin-left: -20px;
+				// margin-left: -20px;
 
 				.number {
 					display: flex;
@@ -364,22 +384,22 @@ body {
 					padding: 0;
 					height: 70px;
 					width: 70px;
-					margin-left: 40px;
-					margin-top: 35px;
+					// margin-left: 40px;
+					// margin-top: 35px;
 					font-size: 2rem;
 					font-family: "Balsamiq Sans", sans-serif;
 					border-radius: 50%;
-					box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+					// box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 				}
 			}
 			
 			.tile {
 				position: relative;
-				height: 187px;
+				// height: 187px;
 				width: 380px;
 				border-radius: 12px;
 				background: $dark-blue;
-				box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+				// box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -403,23 +423,27 @@ body {
 					align-items: center;
 					justify-content: center;
 					margin: 0 auto;
-					font-weight: 600;
+					font-weight: 300;
 
 					&:focus {
 						color: white;
 						outline: 2px solid $yellow;
 						border-radius: 8px;
 					}
+
+					&::placeholder {
+						color: #bbb;
+					}
 				}
 			}
 			
 			.optionalInfo {
 				position: relative;
-				height: 187px;
+				// height: 187px;
 				width: 380px;
 				padding: 0;
 				background: $yellow;
-				box-shadow: 0 4px 12px rgba(250, 220, 100, 0.3);
+				// box-shadow: 0 4px 12px rgba(250, 220, 100, 0.3);
 				color: $text-blue;
 				border-radius: 12px;
 				display: flex;
@@ -427,18 +451,6 @@ body {
 				margin-right: 0;
 				justify-content: center;
 				border: 2px solid darken($yellow, 20%);
-				
-				&:before {
-					content: "";
-					position: absolute;
-					left: -10px;
-					top: 35px;
-					width: 0;
-					height: 0;
-					border-top: 20px solid transparent;
-					border-bottom: 20px solid transparent;
-					border-right: 20px solid $yellow;
-				}
 				
 				textarea {
 					background: transparent;
@@ -458,7 +470,6 @@ body {
 					align-items: center;
 					justify-content: center;
 					margin: 0 auto;
-					font-weight: 600;
 
 					&:focus {
 						color: $text-blue;
@@ -479,6 +490,7 @@ body {
 			}
 
 			.delete {
+				flex-shrink: 0;
 				position: relative;
 				width: 40px;
 				height: 40px;
@@ -490,14 +502,19 @@ body {
 				justify-content: center;
 				font-size: 1.2rem;
 				color: white;
-				box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+				// box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 				transition: all 0.2s ease;
 				cursor: pointer;
 				
-				&:hover {
+				&:hover, &:focus-visible {
 					background: darken(#dc3545, 10%);
 					transform: scale(1.1);
 					box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+				}
+
+				&:focus-visible {
+					outline: 3px solid $orange;
+					outline-offset: 2px;
 				}
 
 				&:before {
@@ -532,19 +549,23 @@ body {
 				justify-content: center;
 				font-size: 1.2rem;
 				color: white;
-				box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+				// box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
 				transition: all 0.2s ease;
 				cursor: pointer;
 				
-				&:hover {
+				&:hover, &:focus-visible {
 					background: $dark-blue;
 					transform: scale(1.1);
 					box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
 					
 					& ~ .tile-line {
 						opacity: 1;
-						width: 758px;
+						// width: 758px;
 					}
+				}
+
+				&:focus-visible {
+					outline: 3px solid $orange;
 				}
 				
 				.icon-plus {
@@ -554,8 +575,9 @@ body {
 					align-items: center;
 					justify-content: center;
 					position: relative;
-					width: 100%;
-					height: 100%;
+					width: 40px;
+					height: 40px;
+					flex-shrink: 0;
 				}
 			}
 		}
@@ -565,12 +587,13 @@ body {
 .tile-line {
 	opacity: 0;
 	position: absolute;
-	left: -800px;
-	top: -50px;
+	right: calc(4.25rem + 40px);
+	top: -16px;
 	background: $primary-blue;
-	height: 7px;
-	width: 5px;
+	height: 3px;
+	width: 758px;
 	transition: all 0.2s ease;
+	border-radius: 2px;
 }
 
 // Popup styling matching player page
@@ -643,8 +666,13 @@ body {
 				border-radius: 50%;
 				transition: all 0.2s ease;
 				
-				&:hover {
+				&:hover, &:focus-visible {
 					background: rgba(255,255,255,0.2);
+				}
+
+				&:focus-visible {
+					outline: 3px solid $orange;
+					outline-offset: 2px;
 				}
 			}
 		}
@@ -679,9 +707,14 @@ body {
 					width: 240px;
 					background: $gray-200;
 					border-radius: 8px;
-					box-shadow: inset 0px 0px 3px 3px rgba(0,0,0,.1);
+					box-shadow: inset 0px 0px 2px 1px rgba(0,0,0,.1);
 					cursor: pointer;
 					overflow: hidden;
+
+					&:focus-visible {
+						outline: 3px solid $orange;
+						outline-offset: 2px;
+					}
 
 					#modeSlider {
 						position: absolute;
@@ -690,7 +723,7 @@ body {
 						width: 50%;
 						background: $primary-blue;
 						border-radius: 8px;
-						transition: 500ms ease-in-out;
+						transition: 200ms ease-in-out;
 
 						&.slide {
 							transform: translateX(-120px);
@@ -711,6 +744,10 @@ body {
 					
 					#practiceMode {
 						left: 0px;
+
+						&.active {
+							color: white;
+						}
 					}
 					
 					#assessmentMode {
@@ -731,7 +768,8 @@ body {
 					text-align: center;
 					background: white;
 					border-radius: 8px;
-					margin: 0 1rem;
+					font-family: "Balsamiq Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+					margin-bottom: 1rem;
 					
 					&:focus {
 						outline: none;
@@ -802,25 +840,30 @@ body {
 	text-align: center;
 	font-family: "Balsamiq Sans", sans-serif;
 	
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: repeating-linear-gradient(
-			45deg,
-			transparent,
-			transparent 2px,
-			rgba(255,255,255,0.1) 2px,
-			rgba(255,255,255,0.1) 4px
-		);
-	}
+	// &::before {
+	// 	content: '';
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	background: repeating-linear-gradient(
+	// 		45deg,
+	// 		transparent,
+	// 		transparent 2px,
+	// 		rgba(255,255,255,0.1) 2px,
+	// 		rgba(255,255,255,0.1) 4px
+	// 	);
+	// }
 	
-	&:hover, &:focus {
+	&:hover, &:focus-visible {
 		transform: translateY(-2px);
 		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+	}
+
+	&:focus-visible {
+		outline: 3px solid $orange;
+		outline-offset: 2px;
 	}
 	
 	&.primary-button {
@@ -903,3 +946,6 @@ body {
 	}
 }
 
+textarea {
+	font-weight: 300;
+}

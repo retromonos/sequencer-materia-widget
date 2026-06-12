@@ -25,10 +25,11 @@
 		<div id="fader" class="dim"></div>
 		<header class="top-header">
 			<div class="header-left">
+				<img src="assets/pencil.svg" alt="Pencil Icon" role="presentation"/>
 				<input type="text" id="title" placeholder="My Sequencer Widget"/>
 			</div>
 			<div class="header-right">
-				<div id="options" class="options-button">
+				<div id="options" class="options-button" tabindex="0">
 					<h5>Mode Options</h5>
 					<div id="assessmentDetails" class="show">
 						<h6 id="mode">Assessment Mode</h6>
@@ -47,9 +48,9 @@
 					<h1 class="tileColumnTitle">Tile</h1>
 					<h1 class="tileColumnTitle">Optional Information</h1>
 				</section>
-				<div id="addSliderButton" class="add-tile-button">
+				<div id="addSliderButton" class="add-tile-button" tabindex="0">
 					<div class="icon-plus main"></div>
-					Add Tile
+					&nbsp;Add Tile
 				</div>
 				<div class="arrow" id="first_step"><p>Click here to add a tile</p></div>
 				<div class="smallarrow" id="second_step"><p>Type a tile title</p></div>
@@ -58,18 +59,18 @@
 		</div>
 
 		<!--Tile Slider Template -->
-		<script type="text/template" id="t-slide-info"><div class="tileInfoSlider" data-id="<%= id %>" tabindex="0">
+		<script type="text/template" id="t-slide-info"><div class="tileInfoSlider" data-id="<%= id %>">
 				<div class="block">
 					<div class="number"><%= tileNum %></div>
 				</div>
 				<div class="tile">
-					<textarea class="tile-text title nondraggable" type="text"><%= tileText %></textarea>
+					<textarea class="tile-text title nondraggable" placeholder="Enter tile label" type="text"><%= tileText %></textarea>
 				</div>
 				<div class="optionalInfo">
 					<textarea type="text" class="cluetext" placeholder="Enter optional information"><%= clueText %></textarea>
 				</div>
 				<div class="tileActions">
-					<div class="addTileDot"><div class="icon-plus"></div></div>
+					<div class="addTileDot" tabindex="0"><div class="icon-plus"></div></div>
 					<div class="tile-line"></div>
 					<button class="delete tile-action-delete" title="Delete tile" tabindex="0"></button>
 				</div>
@@ -95,9 +96,9 @@
 				<div class="popup-body">
 					<div class="section">
 						<h4 id="gameModeTitle">Choose a mode:</h4>
-						<div id="modeContainer">
+						<div id="modeContainer" tabindex="0" aria-label="Toggle between Practice and Assessment modes.">
 							<div id="modeSlider"></div>
-							<div id="practiceMode">Practice</div>
+							<div id="practiceMode" >Practice</div>
 							<div id="assessmentMode" class="active">Assessment</div>
 						</div>
 					</div>

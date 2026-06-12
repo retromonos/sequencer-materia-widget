@@ -92,6 +92,10 @@ Namespace('Sequencer').Creator = (function() {
 		$('#startPopup').addClass('show');
 		$('#fader').addClass('dim');
 
+		$('#addSliderButton').on('keydown', (e) => {
+			if(e.key === "Enter")
+				$('#addSliderButton').click()
+		})
 		$('#addSliderButton').on('click', function() {
 			$('#columnSection').removeClass('hidden');
 			$('#first_step').removeClass('show');
@@ -99,12 +103,15 @@ Namespace('Sequencer').Creator = (function() {
 		});
 
 		// Add a slider between two tiles
+		$('body').delegate('.addTileDot', 'keydown', (e) => {
+			if(e.key === "Enter")
+				e.target.click()
+		})
 		$('body').delegate('.addTileDot', 'click', function() {
 				_addNewTileSlider($(this).parent().parent());
 				_updateTileNums();
 				return $(this).parent().parent().children('.tile-line').css({
 					'opacity': '0',
-					'width': '5px'
 				});
 		});
 
@@ -114,13 +121,22 @@ Namespace('Sequencer').Creator = (function() {
 			e.stopPropagation();
 			const tile = $(e.target).closest('.tileInfoSlider');
 			_numTiles--;
+
+			if(_numTiles <= 0)
+				$('#columnSection').addClass('hidden');
+
 			tile.remove();
 			return _updateTileNums();
 		});
 
 		$('#options').on('click', function() {
 			$('#optionsPopup').addClass('show');
-			return $('#fader').addClass('dim');
+			$('#fader').addClass('dim');
+		});
+		$('#options').on('keydown', function(e) {
+			if(e.key === "Enter") {
+				$('#options').click()
+			}
 		});
 		$('.popup-close').on('click', function() {
 			$(this).closest('.popup').removeClass('show');
@@ -148,6 +164,11 @@ Namespace('Sequencer').Creator = (function() {
 				return $('.closeWindow').click();
 			}
 		});
+
+		$('#modeContainer').on('keydown', (e) => {
+			if(e.key === "Enter")
+				$('#modeContainer').click()
+		})
 
 		$('#modeContainer').on('click', function() {
 			$('#modeSlider').toggleClass('slide');
@@ -211,11 +232,11 @@ Namespace('Sequencer').Creator = (function() {
 		_numTiles++;
 
 		$('#addSliderButton').addClass('slide');
-		if (tileString === '') {
-			$('#second_step').addClass('show');
-		} else {
-			$('#second_step').css('display', 'none');
-		}
+		// if (tileString === '') {
+		// 	$('#second_step').addClass('show');
+		// } else {
+		// 	$('#second_step').css('display', 'none');
+		// }
 
 		// Add a new Slider
 		const newTileSlot = _.template($('#t-slide-info').html());
