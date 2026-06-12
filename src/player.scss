@@ -72,19 +72,19 @@ html, body {
 		gap: 1rem;
 
 		.score-display {
-			background: $score-white;
-			color: $text-blue;
+			background: $cream;
+			color: $dark-blue;
 			padding: 0.5rem 1rem;
 			border-radius: 20px;
-			font-weight: 600;
+			font-weight: 300;
 		}
 		.help-button {
 			width: 32px;
 			height: 32px;
 			border-radius: 50%;
 			background: $light-blue;
-			color: $text-blue;
-			border: 2px solid $primary-blue;
+			color: $dark-blue;
+			border: none;
 			font-size: 1.2rem;
 			font-weight: 700;
 			cursor: pointer;
@@ -93,11 +93,16 @@ html, body {
 			justify-content: center;
 			transition: all 0.2s ease;
 			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-			&:hover {
+			&:hover, &:focus-visible {
 				background: $primary-blue;
 				color: white;
 				transform: scale(1.05);
 				box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+			}
+
+			&:focus-visible {
+				outline: 3px solid #f09c27;
+				outline-offset: 2px;
 			}
 		}
 	}
@@ -165,8 +170,8 @@ html, body {
 			}
 			&#attempts-info {
 				background: $light-blue;
-				border: 1px solid $primary-blue;
-				color: $gray-800;
+				// border: 1px solid $primary-blue;
+				color: #00498C;
 			}
 		}
 
@@ -179,7 +184,7 @@ html, body {
 			padding: 0.5rem 1rem;
 			border-radius: 20px;
 			font-size: 0.9rem;
-			font-weight: 600;
+			font-weight: 300;
 			position: relative;
 			overflow: hidden;
 
@@ -190,19 +195,24 @@ html, body {
 				left: 0;
 				right: 0;
 				bottom: 0;
-				background: repeating-linear-gradient(
-					45deg,
-					transparent,
-					transparent 2px,
-					rgba(255,255,255,0.1) 2px,
-					rgba(255,255,255,0.1) 4px
-				);
+				// background: repeating-linear-gradient(
+				// 	45deg,
+				// 	transparent,
+				// 	transparent 2px,
+				// 	rgba(255,255,255,0.1) 2px,
+				// 	rgba(255,255,255,0.1) 4px
+				// );
 			}
 
-			&:hover, &:focus {
-				background: $primary-blue;
+			&:hover, &:focus-visible {
+				background: darken($dark-blue, 10%);
 				transform: translateY(-1px);
 				box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+			}
+
+			&:focus-visible {
+				outline: 3px solid #f09c27;
+				outline-offset: 2px;
 			}
 
 			&:active {
@@ -222,27 +232,12 @@ html, body {
 		}
 	}
 
-	// During drag operations
-	.sortable-ghost {
-		background: rgba(74, 144, 226, 0.3) !important; 
-		border: 2px dashed $primary-blue !important;
-		border-radius: 8px !important;
-		opacity: 0.7 !important;
-		transform: none !important;
-		box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3) !important;
-		min-height: 60px !important; // TILE HEIGHT
-		display: flex !important;
-		align-items: center !important;
-		padding: 0.75rem !important;
-		margin: 0.125rem 0 !important;
-		pointer-events: none !important; // NO INTERACTION
-	}
 	// Original styling
 	.tile:not(.sortable-ghost) {
 		background: $dark-blue;
 		opacity: 1;
 		border: none;
-		box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		box-shadow: 0 2px 4px rgba(0,0,0,0.5);
 	}
 	.sortable-chosen {
 		transform: scale(1.05);
@@ -364,33 +359,7 @@ html, body {
 						z-index: 1000;
 						box-shadow: 0 8px 16px rgba(0,0,0,0.3);
 					}
-					&::after {
-						content: '';
-						position: absolute;
-						bottom: -3px;
-						left: 3px;
-						right: 3px;
-						height: 6px;
-						background: rgba(0,0,0,0.15);
-						border-radius: 50%;
-						transform: rotate(var(--random-rotation, 0deg));
-						z-index: -1;
-						filter: blur(1px);
-					}
-					// more shadow
-					&::before {
-						content: '';
-						position: absolute;
-						bottom: -1px;
-						left: 1px;
-						right: 1px;
-						height: 3px;
-						background: rgba(0,0,0,0.1);
-						border-radius: 50%;
-						transform: rotate(var(--random-rotation, 0deg));
-						z-index: -2;
-						filter: blur(0.5px);
-					}
+					
 				}
 			}
 			// List view
@@ -414,6 +383,7 @@ html, body {
 					&:focus {
 						transform: none !important;
 						outline: 3px solid $orange-dark;
+						background: darken($dark-blue, 10%);
 						outline-offset: 2px;
 					}
 					&::after {
@@ -449,6 +419,7 @@ html, body {
 				&:focus {
 					outline: 3px solid $orange-dark;
 					outline-offset: 2px;
+					background: darken($dark-blue, 10%)
 				}
 			}
 		}
@@ -519,8 +490,8 @@ html, body {
 		gap: 0.25rem;
 		position: relative;
 		z-index: 1;
-		height: 400px; // height - scrollable area
-		max-height: 400px;
+		height: 100%; // height - scrollable area
+		max-height: 100%;
 		padding: 0.5rem 0.5rem 0.5rem 3rem; 
 		background: rgba(255,255,255,0.1);
 		border-radius: 8px;
@@ -594,7 +565,7 @@ html, body {
 			border-radius: 8px;
 			padding: 1rem;
 			font-size: 1.1rem;
-			font-weight: 600;
+			font-weight: 300;
 			cursor: pointer;
 			transition: all 0.2s ease;
 			position: relative;
@@ -606,13 +577,13 @@ html, body {
 				left: 0;
 				right: 0;
 				bottom: 0;
-				background: repeating-linear-gradient(
-					45deg,
-					transparent,
-					transparent 2px,
-					rgba(255,255,255,0.1) 2px,
-					rgba(255,255,255,0.1) 4px
-				);
+				// background: repeating-linear-gradient(
+				// 	45deg,
+				// 	transparent,
+				// 	transparent 2px,
+				// 	rgba(255,255,255,0.1) 2px,
+				// 	rgba(255,255,255,0.1) 4px
+				// );
 			}
 			&:disabled {
 				background: $gray-400;
@@ -621,9 +592,14 @@ html, body {
 			}
 			&:not(:disabled):hover,
 			&:not(:disabled):focus {
-				background: $primary-blue;
+				background: darken($dark-blue, 10%);
 				transform: translateY(-2px);
 				box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+			}
+
+			&:not(:disabled):focus-visible {
+				outline: 3px solid $orange;
+				outline-offset: 2px;
 			}
 		}
 	}
@@ -649,9 +625,11 @@ html, body {
 		transform: translateY(-2px);
 		box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 	}
-	&:focus {
+	&:focus-visible {
 		outline: 3px solid $orange-dark;
+		background: darken($dark-blue, 10%);
 		outline-offset: 2px;
+		scale: 1.025;
 	}
 	&:active {
 		cursor: grabbing;
@@ -681,6 +659,23 @@ html, body {
 		flex: 1;
 		font-weight: 500;
 		line-height: 1.3;
+	}
+
+	// During drag operations
+	&.sortable-ghost {
+		background: rgba(74, 144, 226, 0.3) !important; 
+		border: 2px dashed $primary-blue !important;
+		border-radius: 8px !important;
+		opacity: 0.7 !important;
+		transform: none !important;
+		box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3) !important;
+		min-height: 60px !important; // TILE HEIGHT
+		display: flex !important;
+		align-items: center !important;
+		padding: 0.75rem !important;
+		margin: 0.125rem 0 !important;
+		// visibility: hidden;
+		pointer-events: none !important; // NO INTERACTION
 	}
 }
 // Clue display
@@ -733,8 +728,13 @@ html, body {
 			border-radius: 50%;
 			transition: all 0.2s ease;
 
-			&:hover {
+			&:hover, &:focus-visible {
 				background: rgba(255,255,255,0.2);
+			}
+
+			&:focus-visible {
+				outline: 3px solid $orange;
+				outline-offset: 2px;
 			}
 		}
 	}
@@ -793,8 +793,13 @@ html, body {
 			justify-content: center;
 			border-radius: 50%;
 			transition: all 0.2s ease;
-			&:hover {
+			&:hover, &:focus-visible {
 				background: rgba(255,255,255,0.2);
+			}
+
+			&:focus-visible {
+				outline: 3px solid $orange;
+				outline-offset: 2px;
 			}
 		}
 	}
@@ -933,7 +938,7 @@ html, body {
 					border-radius: 8px;
 					padding: 0.75rem 1.5rem;
 					font-size: 0.95rem;
-					font-weight: 600;
+					font-weight: 300;
 					cursor: pointer;
 					transition: all 0.2s ease;
 					position: relative;
@@ -945,24 +950,22 @@ html, body {
 						left: 0;
 						right: 0;
 						bottom: 0;
-						background: repeating-linear-gradient(
-							45deg,
-							transparent,
-							transparent 2px,
-							rgba(255,255,255,0.1) 2px,
-							rgba(255,255,255,0.1) 4px
-						);
+						// background: repeating-linear-gradient(
+						// 	45deg,
+						// 	transparent,
+						// 	transparent 2px,
+						// 	rgba(255,255,255,0.1) 2px,
+						// 	rgba(255,255,255,0.1) 4px
+						// );
 					}
-					&:hover, &:focus {
+					&:hover, &:focus-visible {
 						background: $dark-blue;
 						transform: translateY(-2px);
 						box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 					}
-					&.prev-button {
-						background: $gray-500;
-						&:hover, &:focus {
-							background: $gray-600;
-						}
+					&:focus-visible {
+						outline: 3px solid $orange;
+						outline-offset: 2px;
 					}
 					&.start-button {
 						background: $dark-blue;
@@ -1161,7 +1164,7 @@ html, body {
 				border: none;
 				border-radius: 8px;
 				font-size: 1rem;
-				font-weight: 600;
+				font-weight: 300;
 				cursor: pointer;
 				transition: all 0.2s ease;
 				position: relative;
@@ -1174,17 +1177,21 @@ html, body {
 					left: 0;
 					right: 0;
 					bottom: 0;
-					background: repeating-linear-gradient(
-						45deg,
-						transparent,
-						transparent 2px,
-						rgba(255,255,255,0.1) 2px,
-						rgba(255,255,255,0.1) 4px
-					);
+					// background: repeating-linear-gradient(
+					// 	45deg,
+					// 	transparent,
+					// 	transparent 2px,
+					// 	rgba(255,255,255,0.1) 2px,
+					// 	rgba(255,255,255,0.1) 4px
+					// );
 				}
-				&:hover, &:focus {
+				&:hover, &:focus-within {
 					transform: translateY(-2px);
 					box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+				}
+				&:focus-within {
+					outline: 3px solid $orange;
+					outline-offset: 2px;
 				}
 				&.primary-button {
 					background: $gray-500;
@@ -1306,8 +1313,12 @@ html, body {
 				justify-content: center;
 				border-radius: 50%;
 				transition: all 0.2s ease;
-				&:hover {
+				&:hover,&:focus-within {
 					background: rgba(255,255,255,0.2);
+				}
+				&:focus-within {
+					outline: 3px solid $orange;
+					outline-offset: 2px;
 				}
 			}
 		}
@@ -1337,7 +1348,7 @@ html, body {
 				border-radius: 8px;
 				padding: 0.75rem 2rem;
 				font-size: 1rem;
-				font-weight: 600;
+				font-weight: 300;
 				cursor: pointer;
 				transition: all 0.2s ease;
 				position: relative;
@@ -1349,18 +1360,23 @@ html, body {
 					left: 0;
 					right: 0;
 					bottom: 0;
-					background: repeating-linear-gradient(
-						45deg,
-						transparent,
-						transparent 2px,
-						rgba(255,255,255,0.1) 2px,
-						rgba(255,255,255,0.1) 4px
-					);
+					// background: repeating-linear-gradient(
+					// 	45deg,
+					// 	transparent,
+					// 	transparent 2px,
+					// 	rgba(255,255,255,0.1) 2px,
+					// 	rgba(255,255,255,0.1) 4px
+					// );
 				}
-				&:hover, &:focus {
+				&:hover, &:focus-visible {
 					background: $dark-blue;
 					transform: translateY(-2px);
 					box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+				}
+
+				&:focus-visible {
+					outline: 3px solid $orange;
+					outline-offset: 2px;
 				}
 			}
 		}
@@ -1398,7 +1414,7 @@ html, body {
 		border-radius: 8px;
 		padding: 0.75rem 1.5rem;
 		font-size: 1rem;
-		font-weight: 600;
+		font-weight: 300;
 		cursor: pointer;
 		transition: all 0.2s ease;
 		position: relative;
@@ -1411,13 +1427,13 @@ html, body {
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background: repeating-linear-gradient(
-				45deg,
-				transparent,
-				transparent 2px,
-				rgba(255,255,255,0.1) 2px,
-				rgba(255,255,255,0.1) 4px
-			);
+			// background: repeating-linear-gradient(
+			// 	45deg,
+			// 	transparent,
+			// 	transparent 2px,
+			// 	rgba(255,255,255,0.1) 2px,
+			// 	rgba(255,255,255,0.1) 4px
+			// );
 		}
 		&:hover, &:focus {
 			background: $dark-blue;
@@ -1615,4 +1631,13 @@ html, body {
 		transition: none;
 		animation: none;
 	}
+}
+
+button {
+	font-family: "Balsamiq Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+#score {
+	color: $orange;
+	font-weight: 600;
 }

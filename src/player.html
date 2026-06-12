@@ -94,6 +94,10 @@
 								<div class="key-button">Space</div>
 								<div class="key-description">Add/remove tile from sequence</div>
 							</div>
+							<div class="key-row">
+								<div class="key-button">Ctrl+R</div>
+								<div class="key-description">Reset entire sequence</div>
+							</div>
 						</div>
 						<div class="key-group">
 							<div class="key-row">
@@ -114,7 +118,7 @@
 							</div>
 							<div class="key-row">
 								<div class="key-button">Ctrl+V</div>
-								<div class="key-description">Toggle between pile and organized list view</div>
+								<div class="key-description">Toggle between pile and list view</div>
 							</div>
 						</div>
 					</div>
@@ -143,7 +147,7 @@
 			</div>
 			<div class="header-right">
 				<div class="score-display">
-					<span>Score: <span id="score"><%= score %></span></span>
+					<span>best score: <span id="score"><%= score %></span></span>
 				</div>
 				<button id="help-button" class="help-button" aria-label="Show instructions" tabindex="0">
 					?
@@ -187,7 +191,6 @@
 								</div>
 							</div>
 						<% } %>
-						<div id="tileFiller"></div>
 					</div>
 				</div>
 			</section>

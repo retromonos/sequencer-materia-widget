@@ -17,7 +17,7 @@ Namespace('Sequencer').Engine = (function() {
 		'Use Arrow keys to move tiles in/out of sequence and reorder. ' +
 		'Press Enter to view clues. ' +
 		'Press Space to submit when ready. ' +
-		'Press Ctrl+V (or Cmd+V) to toggle between jumbled pile and organized grid view.';
+		'Press Ctrl+V (or Cmd+V) to toggle between jumbled pile and list view.';
 
 	// SortableJS instances
 	let _dragSortable = null;
@@ -116,7 +116,7 @@ Namespace('Sequencer').Engine = (function() {
 		const listViewBtn = document.querySelector('.list-view-btn');
 		dragContainer.classList.add('pile-view');
 		listViewBtn.textContent = '≡ List view';
-		listViewBtn.setAttribute('aria-label', 'Switch to organized grid view');
+		listViewBtn.setAttribute('aria-label', 'Switch to list view');
 
 		_randomizeTilePositions();
 		_updateWraparoundAriaLabel();
@@ -266,11 +266,11 @@ Namespace('Sequencer').Engine = (function() {
 		console.log('Drag change detected, ghost element should be visible');
 		// Force ghost element to be visible
 		const ghostElements = document.querySelectorAll('.sortable-ghost');
-		ghostElements.forEach(function(ghost) {
-			ghost.style.display = 'flex';
-			ghost.style.visibility = 'visible';
-			ghost.style.opacity = '0.7';
-		});
+		// ghostElements.forEach(function(ghost) {
+		// 	ghost.style.display = 'flex';
+		// 	ghost.style.visibility = 'visible';
+		// 	ghost.style.opacity = '0.7';
+		// });
 	};
 	// Handle drag end
 	var _handleDragEnd = function(evt) {
@@ -342,6 +342,13 @@ Namespace('Sequencer').Engine = (function() {
 
 		// Keyboard navigation for tiles
 		$(document).on('keydown', '.tile', _keyDownEvent);
+		$(document).on('keydown', (e) => {
+			if((e.key == 'r' || e.key == 'r') && e.ctrlKey) {
+				e.preventDefault()
+				const del = [..._sequence]
+				del.forEach((v) => _removeTileFromSequence(v))
+			}
+		})
 
 		// Submit button keyboard handling
 		$('#submit').on('keydown', function(e) {
@@ -356,10 +363,7 @@ Namespace('Sequencer').Engine = (function() {
 
 		// Wraparound button for keyboard navigation
 		$('#wraparound').on('click', function() {
-			const unorderedTiles = _tilesInVertOrder.filter(function(t) {
-				if (!t) { return false; }
-				return _sequence.indexOf(t.id) < 0;
-			});
+			const unorderedTiles = document.getElementById('dragContainer').querySelectorAll(".tile");
 			if (unorderedTiles.length > 0) {
 				document.getElementById(unorderedTiles[0].id).focus();
 			}
@@ -403,7 +407,7 @@ Namespace('Sequencer').Engine = (function() {
 			listViewBtn.setAttribute('aria-label', 'Switch to pile view');
 			
 			// Announce view change to screen readers
-			_assistiveStatusUpdate('Switched to organized grid view. Tiles are now arranged in rows and columns.');
+			_assistiveStatusUpdate('Switched to list view. Tiles are now arranged in rows and columns.');
 		} else {
 			// Switch to pile view
 			dragContainer.classList.remove('list-view');
@@ -557,11 +561,14 @@ Namespace('Sequencer').Engine = (function() {
 		_updatePositionIndicators();
 		_updateOrderInstructions();
 		_setAriaLabelsForTiles();
+
+		tileElement.focus()
 		
 		// Check if all tiles are sequenced
 		if (_tilesInSequence === _numTiles) {
 			_tilesSequenced();
 		}
+
 		// Accessibility update
 		_assistiveStatusUpdate(_tiles[tileId].name + ' added to sequence. ' + _tilesInSequence + ' of ' + _numTiles + ' tiles sorted.');
 	};
@@ -591,6 +598,8 @@ Namespace('Sequencer').Engine = (function() {
 			$('#submit').prop('disabled', true);
 			$('#submit').removeClass('enabled');
 		}
+
+		tileElement.focus()
 		
 		// Accessibility update
 		_assistiveStatusUpdate(_tiles[tileId].name + ' removed from sequence. ' + _tilesInSequence + ' of ' + _numTiles + ' tiles sorted.');
@@ -607,7 +616,6 @@ Namespace('Sequencer').Engine = (function() {
 		
 		// Insert at new position
 		_sequence.splice(newIndex, 0, tileId);
-		console.log(_sequence, currentIndex, newIndex)
 		// Update DOM
 		
 		if(orderArea.children[newIndex]) {
@@ -616,6 +624,8 @@ Namespace('Sequencer').Engine = (function() {
 			else
 				orderArea.children[newIndex].insertAdjacentElement('beforebegin', tileElement)
 		}
+
+		tileElement.focus()
 		
 		_updatePositionIndicators();
 		_setAriaLabelsForTiles();
@@ -676,9 +686,11 @@ Namespace('Sequencer').Engine = (function() {
 		$('.fade').removeClass('active');
 		$('.board').removeAttr('inert');
 		$(document).off('keydown.instructions');
+
+		const unorderedTiles = document.getElementById('dragContainer').querySelectorAll(".tile");
 		
-		if (_tilesInVertOrder && _tilesInVertOrder.length > 0) {
-			document.getElementById(_tilesInVertOrder[0].id).focus();
+		if (unorderedTiles && unorderedTiles.length > 0) {
+			document.getElementById(unorderedTiles[0].id).focus();
 		}
 	};
 
