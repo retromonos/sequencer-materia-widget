@@ -986,13 +986,17 @@ html, body {
 	transform: translate(-50%, -50%);
 	width: 90%;
 	max-width: 500px;
-	background: white;
 	border: 2px solid $primary-blue;
 	border-radius: 12px;
 	padding: 0;
 	box-shadow: 0 8px 24px rgba(0,0,0,0.3);
 	z-index: 200;
 	transition: all 0.3s ease;
+	background: white;
+	background-image:
+		linear-gradient(to right, rgba(168, 200, 236, 0.15) 2px, transparent 2px),
+		linear-gradient(to bottom, rgba(168, 200, 236, 0.15) 2px, transparent 2px);
+	background-size: 40px 40px;
 	.results-header {
 		display: flex;
 		justify-content: space-between;
@@ -1053,7 +1057,6 @@ html, body {
 				flex-direction: column;
 				align-items: center;
 				justify-content: center;
-				box-shadow: 0 4px 8px rgba(74, 144, 226, 0.3);
 				.score-number {
 					font-size: 1.5rem;
 					font-weight: bold;
@@ -1097,7 +1100,8 @@ html, body {
 		}
 		// Attempts Status Section
 		.attempts-status {
-			margin-bottom: 1.5rem;
+			// margin-bottom: 1.5rem;
+			flex-shrink: 0;
 			.attempts-remaining, .attempts-exhausted {
 				display: flex;
 				align-items: center;
@@ -1135,6 +1139,14 @@ html, body {
 			display: flex;
 			flex-direction: column;
 			gap: 0.75rem;
+
+			.row {
+				width: 100%;
+				display: flex;
+				flex-direction: row;
+				gap: 12px;
+			}
+			
 			.perfect-score-message, .no-attempts-message {
 				display: flex;
 				align-items: center;
@@ -1162,6 +1174,7 @@ html, body {
 			.action-button {
 				padding: 0.75rem 1.5rem;
 				border: none;
+				width: 100%;
 				border-radius: 8px;
 				font-size: 1rem;
 				font-weight: 300;
@@ -1459,6 +1472,9 @@ html, body {
 }
 
 @media (max-width: 768px) {
+	#resultsHeader .results-content .results-actions .row {
+		flex-direction: column;
+	}
 	.top-header {
 		padding: 0.75rem 1rem;
 

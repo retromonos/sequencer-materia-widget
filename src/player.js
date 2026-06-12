@@ -732,6 +732,7 @@ Namespace('Sequencer').Engine = (function() {
 		$('#okayButton').focus();
 		// Event listener for okay button
 		$('#okayButton').on('click', _closeSubmitSequencePopup);
+		$('.submit-close').on('click', _closeSubmitSequencePopup);
 		// Keyboard support for okay button
 		$('#okayButton').on('keydown', function(e) {
 			if (e.key === 'Enter' || e.key === ' ') {

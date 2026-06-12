@@ -273,7 +273,7 @@
 			<div class="score-summary">
 				<div class="score-circle">
 					<div class="score-number"><%= Math.round((correct / total) * 100) %>%</div>
-					<div class="score-label">Current Score</div>
+					<!-- <div class="score-label">Current Score</div> -->
 				</div>
 				<div class="score-details">
 					<div class="correct-items">
@@ -286,27 +286,7 @@
 				</div>
 			</div>
 
-			<!-- Attempts Info - hide for perfect scores -->
-			<% if (correct !== total) { %>
-				<div class="attempts-status">
-					<% if (freeAttempts > 0 || practiceMode) { %>
-						<div class="attempts-remaining">
-							<% if (practiceMode) { %>
-								<span class="attempts-icon">∞</span>
-								<span class="attempts-text">Unlimited attempts (Practice Mode)</span>
-							<% } else { %>
-								<span class="attempts-icon"><%= freeAttempts %></span>
-								<span class="attempts-text"><%= freeAttempts === 1 ? 'attempt' : 'attempts' %> remaining</span>
-							<% } %>
-						</div>
-					<% } else { %>
-						<div class="attempts-exhausted">
-							<span class="attempts-icon">⚠</span>
-							<span class="attempts-text">No attempts remaining</span>
-						</div>
-					<% } %>
-				</div>
-			<% } %>
+			
 
 			<!-- Action Buttons -->
 			<div class="results-actions">
@@ -319,13 +299,37 @@
 						Visit Score Screen
 					</button>
 				<% } else if (freeAttempts > 0 || practiceMode) { %>
+
+					<!-- Attempts Info - hide for perfect scores -->
+					<div class="row">
+					<% if (correct !== total) { %>
+						<div class="attempts-status">
+							<% if (freeAttempts > 0 || practiceMode) { %>
+								<div class="attempts-remaining">
+									<% if (practiceMode) { %>
+										<span class="attempts-icon">∞</span>
+										<span class="attempts-text">Unlimited attempts (Practice Mode)</span>
+									<% } else { %>
+										<span class="attempts-icon"><%= freeAttempts %></span>
+										<span class="attempts-text"><%= freeAttempts === 1 ? 'attempt' : 'attempts' %> remaining</span>
+									<% } %>
+								</div>
+							<% } else { %>
+								<div class="attempts-exhausted">
+									<span class="attempts-icon">⚠</span>
+									<span class="attempts-text">No attempts remaining</span>
+								</div>
+							<% } %>
+						</div>
+					<% } %>
 					<!-- Can Try Again -->
 					<button id="resultsButton" class="action-button primary-button" aria-label="Try again">
 						Try Again
-						<% if (!practiceMode) { %>
+						<!-- <% if (!practiceMode) { %>
 							<span class="attempts-count">(<%= freeAttempts %> <%= freeAttempts === 1 ? 'attempt' : 'attempts' %> left)</span>
-						<% } %>
+						<% } %> -->
 					</button>
+					</div>
 					<button id="submitScoreButton" class="action-button secondary-button" aria-label="Finish with best score of <%= highestScore %>%">
 						Finish with Best Score (<%= highestScore %>%)
 					</button>
