@@ -1,0 +1,201 @@
+* {
+	outline: 0;
+	user-select: none;
+	box-sizing: border-box;
+}
+
+//Official Sequencer colors
+$primary-blue: #4A90E2;
+$dark-blue: #00498C;
+$text-blue: #001b35;
+$light-blue: #A8C8EC;
+$orange-dark: #f09c27;
+$score-white: #f8fcff;
+$cream: #FDF4E3;
+$peach: #E8B4A0;
+$orange: #D69E2E;
+$yellow: #fadc64;
+$white: #FFFFFF;
+$bgwhite: #fdfeff;
+$gray-100: #e6f5ff;
+$gray-200: #EDF2F7;
+$gray-300: #E2E8F0;
+$gray-400: #CBD5E0;
+$gray-500: #A0AEC0;
+$gray-600: #718096;
+$gray-700: #4A5568;
+$gray-800: #2D3748;
+$gray-900: #1A202C;
+
+$header-height: 72px;
+
+body {
+    font-family: "Balsamiq Sans", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	background: $bgwhite;
+	background-image:
+		linear-gradient(to right, rgba(168, 200, 236, 0.15) 2px, transparent 2px),
+		linear-gradient(to bottom, rgba(168, 200, 236, 0.15) 2px, transparent 2px);
+	background-size: 40px 40px;
+    height: fit-content;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+
+    .headers {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: $header-height;
+        gap: 40px;
+
+        h2 {
+            text-align: center;
+            margin: auto 0;
+            width: 35%;
+        }
+
+        .dummy-number {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        .dummy-indicator {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+    }
+
+    #sequence-area {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        margin-bottom: 48px;
+
+        .sequence {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: center;
+            gap: 40px;
+
+            .number {
+                border-radius: 100%;
+                width: 48px;
+                height: 48px;
+                background-color: $dark-blue;
+                display: flex;
+                margin: auto 0;
+                flex-shrink: 0;
+
+                p {
+                    color: white;
+                    font-weight: bold;
+                    margin: auto;
+                    width: fit-content;
+                    font-size: 20px;
+                }
+            }
+
+            // finish score screen . (˶>⩊<˶)
+
+            .card {
+                border-radius: 12px;
+                padding: 20px 24px;
+                width: 35%;
+                text-align: center;
+
+                &.user {
+                    background-color: $dark-blue;
+                    color: white;
+                }
+                
+                &.correct {
+                    background-color: $yellow;
+                    color: black;
+                }
+            }
+
+            .indicator {
+                width: 32px;
+                height: 32px;
+                margin: auto 0;
+                display: flex;
+                background-color: $primary-blue;
+                border-radius: 100%;
+                flex-shrink: 0;
+
+                &::after {
+                    font-size: 12px;
+                    margin: auto;
+                    color: white;
+                    font-weight: bold;
+                }
+
+                &.right {
+                    background-color: $primary-blue;
+                    &::after {
+                        content: "✓";
+                    }
+                }
+
+                &.wrong {
+                    background-color: darkred;
+                    &::after {
+                        content: "X";
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media (width <= 650px) {
+    .results {
+        #sequence-area {
+            gap: 20px;
+
+            .sequence {
+                gap: 16px;
+
+                .card {
+                    padding: 8px 12px;
+                    font-size: 14px;
+                }
+
+                .number {
+                    width: 32px;
+                    height: 32px;
+                    p {
+                        font-size: 16px;
+                    }
+                }
+
+                .indicator {
+                    width: 20px;
+                    height: 20px;
+
+                }
+            }
+        }
+
+        .headers {
+            gap: 16px;
+
+            h2 {
+                font-size: 16px;
+            }
+
+            .dummy-number {
+                width: 32px;
+                height: 32px;
+            }
+        }
+    }
+}

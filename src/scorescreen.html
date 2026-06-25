@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sequencer Scorescreen</title>
+		<meta charset="utf-8" />
+		<meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0, target-densitydpi=device-dpi'>
+
+		<!-- STYLESHEETS -->
+		<link rel="stylesheet" type="text/css" href="scoreScreen.css">
+        <link href="//fonts.googleapis.com/css?family=Balsamiq+Sans:400,700" rel="stylesheet" type="text/css">
+
+		<!-- REQUIRED MATERIA JAVASCRIPT -->
+		<script src="materia.scorecore.js"></script>
+
+		<!-- MAIN SCORE SCRIPT -->
+		<script src="scoreScreen.js"></script>
+	</head>
+    <body>
+        <div class="results">
+            <div class="headers">
+                <div class="dummy-number"></div>
+                <h2>Your Final Sequence</h2>
+                <div class="dummy-indicator"></div>
+                <h2>Correct Sequence</h2>
+            </div>
+            <div id="sequence-area">
+                <template id="sequence-template">
+                    <div class="sequence">
+                        <div class="number">
+                            <p>1</p>
+                        </div>
+                        <div class="card user">
+                            User Answer
+                        </div>
+                        <div class="indicator"></div>
+                        <div class="card correct">
+                            Correct Answer
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+        <script>
+            Materia.ScoreCore.start(Sequencer.ScoreCore);
+        </script>
+    </body>
+</html>

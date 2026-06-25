@@ -22,6 +22,7 @@ files:
 score:
   is_scorable: Yes
   score_module: Sequencer
+  score_screen: scoreScreen.html
 meta_data:
   accessibility_keyboard: Full
   accessibility_reader: Full
