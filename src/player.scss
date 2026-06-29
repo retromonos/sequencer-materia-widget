@@ -677,6 +677,36 @@ html, body {
 		flex: 1;
 		font-weight: 500;
 		line-height: 1.3;
+		padding-right: 16px;
+	}
+	.tile-handle {
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		height: 100%;
+		width: 20px;
+		background-color: none;
+		opacity: 0.8;
+		border-radius: 0 8px 8px 0;
+		border-left: #ffffff40 1px solid;
+		padding-left: 0px;
+		display: flex;
+		box-sizing: border-box;
+		cursor: grab;
+
+		&::after {
+			content: "⣿";
+			font-size: 24px;
+			color: #fff;
+			margin: auto;
+		}
+
+		&:active {
+			cursor: grabbing;
+			&::after {
+				color: $orange-dark;
+			}
+		}
 	}
 
 	// During drag operations
@@ -1650,6 +1680,23 @@ html, body {
 				font-size: 14px;
 				font-weight: 300;
 			}
+		}
+	}
+	.tile {
+		cursor: default;
+		pointer-events: none;
+
+		&:active, &.sortable-ghost {
+			~.tile {
+				pointer-events: all;
+			}
+		}
+		&:has(~.tile:active, ~.tile.sortable-ghost) {
+			pointer-events: all;
+		}
+		
+		.tile-icon, .tile-handle {
+			pointer-events: all;
 		}
 	}
 }
