@@ -82,6 +82,13 @@ Namespace('Sequencer').Engine = (function() {
 		return _tiles;
 	};
 
+	let _rescaleTileView = () => {
+		if(window.innerWidth <= 768) {
+			_isListView = true
+			_enableListView()
+		}
+	}
+
 	// Draw the main board 
 	var _drawBoard = function(title) {
 		const theTiles = _makeTiles(_qset.items);
@@ -117,6 +124,12 @@ Namespace('Sequencer').Engine = (function() {
 		dragContainer.classList.add('pile-view');
 		listViewBtn.textContent = '≡ List view';
 		listViewBtn.setAttribute('aria-label', 'Switch to list view');
+
+		window.addEventListener("resize", (e) => {
+			_rescaleTileView()
+		})
+
+		_rescaleTileView()
 
 		_randomizeTilePositions();
 		_updateWraparoundAriaLabel();
@@ -391,32 +404,40 @@ Namespace('Sequencer').Engine = (function() {
 		});
 	};
 
+	let _enableListView = () => {
+		const dragContainer = document.getElementById('dragContainer');
+		const listViewBtn = document.querySelector('.list-view-btn');
 
+		dragContainer.classList.add('list-view');
+		dragContainer.classList.remove('pile-view');
+		listViewBtn.textContent = '≡ Pile view';
+		listViewBtn.setAttribute('aria-label', 'Switch to pile view');
+	}
+
+	let _enablePileView = () => {
+		const dragContainer = document.getElementById('dragContainer');
+		const listViewBtn = document.querySelector('.list-view-btn');
+
+		dragContainer.classList.remove('list-view');
+		dragContainer.classList.add('pile-view');
+		listViewBtn.textContent = '≡ List view';
+		listViewBtn.setAttribute('aria-label', 'Switch to list view');
+		
+		_randomizeTilePositions();
+	}
 
 	// Toggle between jumbled pile and list view
 	var _toggleListView = function() {
 		_isListView = !_isListView;
-		const dragContainer = document.getElementById('dragContainer');
-		const listViewBtn = document.querySelector('.list-view-btn');
 		
 		if (_isListView) {
 			// Switch to list view
-			dragContainer.classList.add('list-view');
-			dragContainer.classList.remove('pile-view');
-			listViewBtn.textContent = '≡ Pile view';
-			listViewBtn.setAttribute('aria-label', 'Switch to pile view');
-			
+			_enableListView()
 			// Announce view change to screen readers
 			_assistiveStatusUpdate('Switched to list view. Tiles are now arranged in rows and columns.');
 		} else {
 			// Switch to pile view
-			dragContainer.classList.remove('list-view');
-			dragContainer.classList.add('pile-view');
-			listViewBtn.textContent = '≡ List view';
-			listViewBtn.setAttribute('aria-label', 'Switch to list view');
-			
-			_randomizeTilePositions();
-			
+			_enablePileView()
 			_assistiveStatusUpdate('Switched to pile view. Tiles are now in a random arrangement.');
 		}
 		
