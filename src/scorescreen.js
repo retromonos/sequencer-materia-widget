@@ -29,8 +29,9 @@ Namespace('Sequencer').ScoreCore = (function() {
 
         scoreTable.forEach((v,i) => {
             const sequence = document.importNode(_sequenceTemp, true)
-
             const isCorrect = v.score === 100
+
+            sequence.querySelector(".sequence").ariaLabel = `Sequence ${i+1}: ${isCorrect ? "Correct" : "Incorrect"}. You answered ${v.data[0]}. ${!isCorrect ? `Answer was ${_questions[v.data[1] - 1].questions[0].text}.` : ""}`
 
             const number = sequence.querySelector("p")
             number.innerHTML = i+1
@@ -39,7 +40,6 @@ Namespace('Sequencer').ScoreCore = (function() {
             user.innerHTML = v.data[0]
 
             const correct = sequence.querySelector(".card.correct")
-            console.log(v.data[2] - 1)
             correct.innerHTML = _questions[v.data[1] - 1].questions[0].text
 
             const indicator = sequence.querySelector(".indicator")

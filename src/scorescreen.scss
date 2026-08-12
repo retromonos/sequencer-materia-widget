@@ -83,6 +83,12 @@ body {
             width: 100%;
             justify-content: center;
             gap: 40px;
+            border-radius: 4px;
+
+            &:focus-visible {
+                outline: 3px solid #f09c27;
+                outline-offset: 2px;
+            }
 
             .number {
                 border-radius: 100%;
